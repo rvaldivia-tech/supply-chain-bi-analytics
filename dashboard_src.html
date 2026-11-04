@@ -1,0 +1,418 @@
+<title>Portafolio Logístico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+/* Concepto: tablero de operaciones con tipografía de señalética de almacén (Barlow),
+   fondo gris azulado frío, una sola familia de acento azul y naranja solo como 2ª serie. */
+:root{
+  --bg:#f1f4f7; --surface:#ffffff; --ink:#13202c; --ink2:#44525f; --muted:#5b6977;
+  --line:#dbe2e9; --grid:#e7ecf1;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --tip:#13202c; --tipink:#f1f4f7;
+  --f-body:'Barlow',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-disp:'Barlow Condensed','Barlow',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1319; --surface:#151f29; --ink:#e8edf2; --ink2:#bac5d0; --muted:#8f9ba7;
+    --line:#25313c; --grid:#1f2a34;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+    --tip:#e8edf2; --tipink:#0d1319; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d1319; --surface:#151f29; --ink:#e8edf2; --ink2:#bac5d0; --muted:#8f9ba7;
+  --line:#25313c; --grid:#1f2a34;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+  --tip:#e8edf2; --tipink:#0d1319; color-scheme:dark;
+}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45}
+*{box-sizing:border-box}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:22px 48px}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 24px;margin-bottom:18px}
+h1{font-family:var(--f-disp);font-weight:700;font-size:clamp(28px,5vw,40px);letter-spacing:.01em;line-height:1.05;margin:0;text-wrap:balance}
+.lede{margin:6px 0 0;color:var(--ink2);max-width:60ch}
+.chip{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);background:var(--surface);padding:4px 10px;border-radius:99px;white-space:nowrap}
+nav.tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line);margin-bottom:18px}
+nav.tabs button{font:inherit;color:var(--muted);background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px 9px;cursor:pointer;text-align:left;white-space:nowrap}
+nav.tabs button b{display:block;font-family:var(--f-disp);font-weight:600;font-size:19px;letter-spacing:.01em;color:var(--ink2)}
+nav.tabs button span{font-size:12.5px}
+nav.tabs button[aria-selected="true"]{border-bottom-color:var(--s1)}
+nav.tabs button[aria-selected="true"] b{color:var(--ink)}
+button:focus-visible,summary:focus-visible{outline:2px solid var(--s1);outline-offset:2px}
+.q{margin:0 0 14px;color:var(--ink2);max-width:75ch}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px;margin-bottom:14px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;min-width:0}
+.tile .l{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tile .v{font-family:var(--f-disp);font-weight:600;font-size:44px;line-height:1.05;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.tile .v small{font-size:20px;font-weight:500;color:var(--ink2);margin-left:3px}
+.tile .d{font-size:13px;color:var(--ink2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:14px;margin-bottom:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px 12px;min-width:0}
+.card.wide{grid-column:1/-1}
+.ch{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+h3{margin:0;font-size:16px;font-weight:600}
+.sub{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.tg{font:inherit;font-size:12.5px;color:var(--ink2);background:none;border:1px solid var(--line);border-radius:4px;padding:3px 9px;cursor:pointer;white-space:nowrap}
+.tg[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 16px;margin:8px 0 0;font-size:13px;color:var(--ink2)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.plot{position:relative;margin-top:6px;min-height:40px}
+.plot svg{display:block;max-width:100%}
+.gl{stroke:var(--grid);stroke-width:1}
+.tx{fill:var(--muted);font-size:12px;font-family:var(--f-body);font-variant-numeric:tabular-nums}
+.tx2{fill:var(--ink2);font-size:12.5px;font-family:var(--f-body);font-variant-numeric:tabular-nums}
+.tx3{paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round;fill:var(--ink);font-size:13px;font-weight:500;font-family:var(--f-body);font-variant-numeric:tabular-nums}
+.ref{stroke:var(--ink2);stroke-width:1.25;stroke-dasharray:4 4}
+.cross{stroke:var(--muted);stroke-width:1}
+.tip{position:absolute;z-index:5;pointer-events:none;background:var(--tip);color:var(--tipink);border-radius:4px;padding:6px 9px;font-size:12.5px;line-height:1.4;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.tip i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.tw{overflow-x:auto;margin-top:8px;max-height:360px;overflow-y:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:left;padding:6px 10px;border-bottom:1px solid var(--line);white-space:nowrap;position:sticky;top:0;background:var(--surface)}
+td{padding:6px 10px;border-bottom:1px solid var(--grid);white-space:nowrap}
+.r{text-align:right}.c{text-align:center}.l{text-align:left}
+.find{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px 28px;margin:6px 0 14px;padding:0;list-style:none}
+.find li{color:var(--ink2);max-width:46ch}
+.find b{color:var(--ink);font-weight:600}
+h2{font-family:var(--f-disp);font-weight:600;font-size:22px;margin:22px 0 8px;letter-spacing:.01em}
+details{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 16px;color:var(--ink2)}
+summary{cursor:pointer;font-weight:500;color:var(--ink)}
+details ul{margin:8px 0 2px;padding-left:18px}
+details li{margin:3px 0}
+footer{margin-top:26px;color:var(--muted);font-size:13px;max-width:80ch}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Portafolio de analítica logística</h1>
+      <p class="lede">Tres proyectos con SQL sobre operaciones de almacén y distribución: rotación de inventario, nivel de servicio OTIF y productividad de picking.</p>
+    </div>
+    <span class="chip">Datos simulados</span>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Proyectos">
+    <button role="tab" id="t-rotacion" aria-controls="p-rotacion"><b>Rotación de inventario</b><span>oct 2025 – sep 2026</span></button>
+    <button role="tab" id="t-otif" aria-controls="p-otif"><b>Nivel de servicio OTIF</b><span>oct 2025 – sep 2026</span></button>
+    <button role="tab" id="t-prod" aria-controls="p-prod"><b>Productividad de picking</b><span>abr – sep 2026</span></button>
+  </nav>
+  <main id="panels"></main>
+  <footer>Los datos son ficticios y se generaron con errores de calidad a propósito (duplicados, nulos, fechas mezcladas) para practicar la limpieza. Los indicadores se calcularon con SQL en SQLite y se verificaron con un recálculo independiente en pandas.</footer>
+</div>
+
+<script>
+const D = __DATA__;
+const NS = 'http://www.w3.org/2000/svg';
+const el = (t, a = {}, ...c) => { const e = document.createElement(t); for (const k in a) { if (k === 'class') e.className = a[k]; else if (k === 'html') e.innerHTML = a[k]; else e.setAttribute(k, a[k]); } c.flat().forEach(x => e.append(x)); return e; };
+const nf = (v, d = 0) => Number(v).toLocaleString('es-PE', { minimumFractionDigits: d, maximumFractionDigits: d });
+const pct = (v, d = 1) => nf(v, d) + '%';
+const sol = v => 'S/ ' + nf(v);
+const solK = v => 'S/ ' + nf(v / 1000) + 'k';
+const MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+const mesLbl = m => MES[+m.slice(5, 7) - 1] + ' ' + m.slice(2, 4);
+const diaLbl = d => d.slice(8, 10) + ' ' + MES[+d.slice(5, 7) - 1];
+const med = a => { const s = [...a].sort((x, y) => x - y), h = s.length >> 1; return s.length % 2 ? s[h] : (s[h - 1] + s[h]) / 2; };
+
+function niceTicks(min, max, n = 5) {
+  if (min === max) { max = min + 1; }
+  const step0 = (max - min) / (n - 1), mag = Math.pow(10, Math.floor(Math.log10(step0))), e = step0 / mag;
+  const step = (e <= 1.5 ? 1 : e <= 3 ? 2 : e <= 7 ? 5 : 10) * mag;
+  const lo = Math.floor(min / step + 1e-9) * step, hi = Math.ceil(max / step - 1e-9) * step, t = [];
+  for (let v = lo; v <= hi + step / 2; v += step) t.push(+v.toFixed(10));
+  return t;
+}
+const tableHTML = (head, rows, align = []) =>
+  '<table><thead><tr>' + head.map((h, i) => `<th class="${align[i] || (i ? 'r' : 'l')}">${h}</th>`).join('') + '</tr></thead><tbody>' +
+  rows.map(r => '<tr>' + r.map((c, i) => `<td class="${align[i] || (i ? 'r' : 'l')}">${c}</td>`).join('') + '</tr>').join('') + '</tbody></table>';
+
+function showTip(host, html, x, y, flip) {
+  let t = host.querySelector('.tip');
+  if (!t) { t = el('div', { class: 'tip' }); host.append(t); }
+  t.innerHTML = html; t.hidden = false;
+  const w = t.offsetWidth, hw = host.clientWidth;
+  let left = flip ? x - w - 12 : x + 12;
+  left = Math.max(0, Math.min(left, hw - w));
+  t.style.left = left + 'px'; t.style.top = Math.max(0, y) + 'px';
+}
+const hideTip = host => { const t = host.querySelector('.tip'); if (t) t.hidden = true; };
+
+/* ---------- línea ---------- */
+function drawLine(host, s) {
+  if (!host.clientWidth) return;
+  const W = Math.max(280, Math.floor(host.clientWidth)), H = s.h || 250, n = s.labels.length;
+  const endLab = W > 600 && s.series.length > 1;
+  const m = { l: 52, r: endLab ? 100 : 28, t: s.mark ? 28 : 14, b: 28 };
+  const iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const vals = s.series.flatMap(x => x.values).concat(s.ref ? [s.ref.value] : []);
+  const ticks = niceTicks(s.ymin ?? Math.min(...vals), s.ymax ?? Math.max(...vals), 5);
+  const lo = ticks[0], hi = ticks[ticks.length - 1];
+  const X = i => m.l + (n === 1 ? iw / 2 : iw * i / (n - 1)), Y = v => m.t + ih * (1 - (v - lo) / (hi - lo));
+  let g = '';
+  ticks.forEach(t => { g += `<line class="gl" x1="${m.l}" x2="${W - m.r}" y1="${Y(t)}" y2="${Y(t)}"/><text class="tx" x="${m.l - 8}" y="${Y(t) + 4}" text-anchor="end">${s.yfmt(t)}</text>`; });
+  const every = Math.max(1, Math.ceil(n / Math.max(2, Math.floor(iw / 64))));
+  s.labels.forEach((l, i) => { if (i % every === 0) g += `<text class="tx" x="${X(i)}" y="${H - 8}" text-anchor="middle">${l}</text>`; });
+  if (s.ref) g += `<line class="ref" x1="${m.l}" x2="${W - m.r}" y1="${Y(s.ref.value)}" y2="${Y(s.ref.value)}"/><text class="tx2" x="${m.l + 6}" y="${Y(s.ref.value) - 6}">${s.ref.label}</text>`;
+  if (s.mark) g += `<line class="ref" x1="${X(s.mark.index)}" x2="${X(s.mark.index)}" y1="${m.t - 8}" y2="${m.t + ih}"/><text class="tx2" x="${X(s.mark.index) + 6}" y="${m.t - 2}">${W < 520 ? s.mark.short : s.mark.label}</text>`;
+  s.series.forEach(se => {
+    const d = se.values.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ',' + Y(v).toFixed(1)).join('');
+    g += `<path d="${d}" fill="none" stroke="${se.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+    const li = se.values.length - 1;
+    g += `<circle cx="${X(li)}" cy="${Y(se.values[li])}" r="4" fill="${se.color}" stroke="var(--surface)" stroke-width="2"/>`;
+  });
+  if (endLab) {
+    const items = s.series.map(se => ({ se, y: Y(se.values[se.values.length - 1]) + 4 })).sort((a, b) => a.y - b.y);
+    for (let i = 1; i < items.length; i++) if (items[i].y - items[i - 1].y < 15) items[i].y = items[i - 1].y + 15;
+    items.forEach(it => { g += `<text class="tx2" x="${X(n - 1) + 11}" y="${it.y}">${it.se.short || it.se.name}</text>`; });
+  }
+  g += `<line class="cross" id="cx" y1="${m.t}" y2="${m.t + ih}" visibility="hidden"/><g id="hv"></g><rect id="hit" x="${m.l}" y="0" width="${iw}" height="${H}" fill="transparent" style="touch-action:pan-y"/>`;
+  host.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${s.title}">${g}</svg>`;
+  const svg = host.querySelector('svg'), cx = svg.querySelector('#cx'), hv = svg.querySelector('#hv'), hit = svg.querySelector('#hit');
+  const move = ev => {
+    const r = svg.getBoundingClientRect(), px = ev.clientX - r.left;
+    const i = Math.max(0, Math.min(n - 1, Math.round((px - m.l) / iw * (n - 1))));
+    cx.setAttribute('x1', X(i)); cx.setAttribute('x2', X(i)); cx.setAttribute('visibility', 'visible');
+    hv.innerHTML = s.series.map(se => `<circle cx="${X(i)}" cy="${Y(se.values[i])}" r="4" fill="${se.color}" stroke="var(--surface)" stroke-width="2"/>`).join('');
+    const html = `<b>${s.labels[i]}</b><br>` + s.series.map(se => `<i style="background:${se.color}"></i>${se.name}: <b>${(s.vfmt || s.yfmt)(se.values[i])}</b>`).join('<br>');
+    showTip(host, html, X(i), m.t, i > (n - 1) / 2);
+  };
+  hit.addEventListener('pointermove', move); hit.addEventListener('pointerdown', move);
+  hit.addEventListener('pointerleave', () => { cx.setAttribute('visibility', 'hidden'); hv.innerHTML = ''; hideTip(host); });
+}
+
+/* ---------- barras horizontales ---------- */
+function drawBars(host, s) {
+  if (!host.clientWidth) return;
+  const W = Math.max(280, Math.floor(host.clientWidth)), n = s.labels.length, row = s.row || 30;
+  const lw = Math.min(Math.max(...s.labels.map(l => l.length)) * 7.8 + 16, W * 0.44, 190);
+  const m = { l: lw, r: 78, t: 6, b: 24 };
+  const H = m.t + m.b + n * row, iw = W - m.l - m.r;
+  const top = Math.max(...s.values, s.ref ? s.ref.value : 0) * 1.04;
+  const ticks = niceTicks(0, s.max ?? top, iw < 300 ? 3 : 5); const hi = ticks[ticks.length - 1];
+  const X = v => m.l + iw * v / hi;
+  let g = '';
+  ticks.forEach(t => { g += `<line class="gl" x1="${X(t)}" x2="${X(t)}" y1="${m.t}" y2="${H - m.b}"/><text class="tx" x="${X(t)}" y="${H - 8}" text-anchor="middle">${(s.axfmt || s.xfmt)(t)}</text>`; });
+  const bh = Math.min(18, row - 10);
+  s.labels.forEach((l, i) => {
+    const y = m.t + i * row + (row - bh) / 2, w = Math.max(0, X(s.values[i]) - m.l), r = Math.min(4, bh / 2, w);
+    const path = w < 1 ? '' : `M${m.l},${y}h${w - r}a${r},${r} 0 0 1 ${r},${r}v${bh - 2 * r}a${r},${r} 0 0 1 ${-r},${r}h${-(w - r)}z`;
+    const low = s.ref && s.values[i] < s.ref.value;
+    g += `<text class="tx3" x="${m.l - 8}" y="${y + bh / 2 + 4.5}" text-anchor="end">${l}</text>`;
+    g += `<path d="${path}" fill="${s.color || 'var(--s1)'}"/>`;
+    g += `<text class="tx3" x="${m.l + w + 6}" y="${y + bh / 2 + 4.5}">${low ? '▼ ' : ''}${s.vlabel ? s.vlabel[i] : s.xfmt(s.values[i])}</text>`;
+    g += `<rect class="hb" data-i="${i}" x="0" y="${m.t + i * row}" width="${W}" height="${row}" fill="transparent"/>`;
+  });
+  if (s.ref) g += `<line class="ref" x1="${X(s.ref.value)}" x2="${X(s.ref.value)}" y1="${m.t}" y2="${H - m.b}"/>`;
+  host.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${s.title}">${g}</svg>`;
+  host.querySelectorAll('.hb').forEach(r => {
+    const show = ev => { const i = +r.dataset.i; showTip(host, `<b>${s.labels[i]}</b><br>${s.tipTitle || 'Valor'}: <b>${s.xfmt(s.values[i])}</b>` + (s.extra ? '<br>' + s.extra[i] : ''), Math.min(X(s.values[i]) + 10, W * 0.6), m.t + i * row - 4, X(s.values[i]) > W * 0.6); };
+    r.addEventListener('pointermove', show); r.addEventListener('pointerdown', show); r.addEventListener('pointerleave', () => hideTip(host));
+  });
+}
+
+/* ---------- tarjetas ---------- */
+function card(s) {
+  const c = el('section', { class: 'card' + (s.wide ? ' wide' : '') });
+  const btn = el('button', { class: 'tg', type: 'button', 'aria-pressed': 'false' }, 'Ver tabla');
+  c.append(el('div', { class: 'ch' }, el('div', {}, el('h3', {}, s.title), s.sub ? el('p', { class: 'sub' }, s.sub) : ''), s.kind === 'table' ? '' : btn));
+  if (s.kind === 'table') {
+    c.append(el('div', { class: 'tw', html: tableHTML(s.head, s.rows, s.align) }));
+    return c;
+  }
+  if (s.series && s.series.length > 1) c.append(el('div', { class: 'legend', html: s.series.map(x => `<span><i style="background:${x.color}"></i>${x.name}</span>`).join('') }));
+  const host = el('div', { class: 'plot' }), tw = el('div', { class: 'tw' });
+  tw.hidden = true;
+  let head, rows;
+  if (s.kind === 'line') { head = ['Periodo', ...s.series.map(x => x.name)]; rows = s.labels.map((l, i) => [l, ...s.series.map(x => (s.vfmt || s.yfmt)(x.values[i]))]); }
+  else { head = [s.labelHead || '', s.tipTitle || 'Valor', ...(s.extraHead || [])]; rows = s.labels.map((l, i) => [l, s.xfmt(s.values[i]), ...(s.extraRows ? s.extraRows[i] : [])]); }
+  tw.innerHTML = tableHTML(head, rows);
+  c.append(host, tw);
+  const draw = () => (s.kind === 'line' ? drawLine : drawBars)(host, s);
+  new ResizeObserver(draw).observe(host);
+  btn.addEventListener('click', () => {
+    const on = btn.getAttribute('aria-pressed') !== 'true';
+    btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Ver gráfico' : 'Ver tabla';
+    host.hidden = on; tw.hidden = !on; if (!on) draw();
+  });
+  return c;
+}
+const tile = (l, v, u, d) => el('div', { class: 'tile' }, el('div', { class: 'l' }, l), el('div', { class: 'v', html: v + (u ? `<small>${u}</small>` : '') }), el('div', { class: 'd' }, d));
+const tiles = (...t) => el('div', { class: 'tiles' }, t);
+const grid = (...c) => el('div', { class: 'grid' }, c);
+const finds = a => el('ul', { class: 'find', html: a.map(x => `<li>${x}</li>`).join('') });
+const defs = a => el('details', {}, el('summary', {}, 'Cómo se calcula'), el('ul', { html: a.map(x => `<li>${x}</li>`).join('') }));
+const pctTick = v => nf(v, 0) + '%';
+
+/* ---------- Proyecto 1 ---------- */
+function buildRotacion() {
+  const p = D.p1, g = p.global, sk = p.sku;
+  const alto = sk.filter(r => r.dias_inventario > 90), invAlto = alto.reduce((a, r) => a + r.inv_prom_valor, 0);
+  const riesgo = sk.filter(r => r.dias_inventario !== null && r.dias_inventario < 30);
+  const clsA = sk.filter(r => r.clase_abc === 'A'), medA = med(clsA.map(r => r.dias_inventario).filter(v => v !== null));
+  const neg = sk.filter(r => r.meses_stock_negativo > 0);
+  const mensual = p.mensual;
+  const orden = { 'Revisar': 0, 'Riesgo': 1, 'Exceso': 2, 'Alto': 3 };
+  const glifo = e => e.startsWith('Revisar') ? '● ' : e.startsWith('Riesgo') ? '▼ ' : e.startsWith('Exceso') ? '■ ' : '▲ ';
+  const revisar = sk.filter(r => !r.estado_inventario.startsWith('Saludable'))
+    .sort((a, b) => orden[a.estado_inventario.split(' ')[0]] - orden[b.estado_inventario.split(' ')[0]] || (b.dias_inventario ?? 0) - (a.dias_inventario ?? 0));
+  const root = el('div');
+  root.append(el('p', { class: 'q' }, '¿Cuántas veces rota el inventario, cuántos días de cobertura hay y qué SKUs inmovilizan capital o están cerca del quiebre?'));
+  root.append(tiles(
+    tile('Rotación anual', nf(g.rotacion_global, 1), '×', 'Costo de salidas ÷ inventario promedio'),
+    tile('Días de inventario', nf(g.dias_inventario_global, 0), 'días', '365 ÷ rotación'),
+    tile('Costo de salidas', solK(g.cogs_anual), '', '12 meses, valorizado a costo'),
+    tile('Inventario promedio', solK(g.inv_prom_valor), '', 'Promedio de 12 cierres mensuales')));
+  root.append(grid(
+    card({ kind: 'line', wide: true, title: 'Inventario al cierre y costo de salidas por mes', sub: 'Ambas series en soles. El inventario inicial incluía exceso que se fue consumiendo.',
+      labels: mensual.map(r => mesLbl(r.mes)),
+      series: [{ name: 'Inventario al cierre', short: 'Inventario', color: 'var(--s1)', values: mensual.map(r => r.inventario_cierre_valor) },
+               { name: 'Costo de salidas del mes', short: 'Salidas', color: 'var(--s2)', values: mensual.map(r => r.cogs) }],
+      ymin: 0, yfmt: solK, vfmt: sol }),
+    card({ kind: 'bar', title: 'Días de inventario por categoría', sub: 'Menos días significa rotación más rápida.', labelHead: 'Categoría', tipTitle: 'Días de inventario',
+      labels: p.categoria.map(r => r.categoria), values: p.categoria.map(r => r.dias_inventario), xfmt: v => nf(v, 0),
+      extra: p.categoria.map(r => `Rotación: <b>${nf(r.rotacion, 1)}×</b> · ${r.skus} SKUs`),
+      extraHead: ['Rotación (×)', 'SKUs'], extraRows: p.categoria.map(r => [nf(r.rotacion, 1), r.skus]) }),
+    card({ kind: 'bar', title: 'Costo de salidas por clase ABC', sub: 'Porcentaje del costo anual de salidas.', labelHead: 'Clase', tipTitle: '% del costo de salidas',
+      labels: p.abc.map(r => `${r.clase} · ${r.skus} SKUs`), values: p.abc.map(r => r.pct_cogs), xfmt: v => pct(v, v % 1 ? 1 : 0), axfmt: pctTick,
+      extra: p.abc.map(r => `Cobertura mediana: <b>${nf(r.dias_mediana, 0)} días</b>`), extraHead: ['Cobertura mediana (días)'], extraRows: p.abc.map(r => [nf(r.dias_mediana, 0)]) }),
+    card({ kind: 'table', wide: true, title: 'SKUs para revisar', sub: `${revisar.length} de ${sk.length} SKUs fuera del rango saludable (30 a 90 días). ▲ alto · ■ exceso · ▼ riesgo de quiebre · ● revisar datos.`,
+      head: ['SKU', 'Categoría', 'ABC', 'Días', 'Rotación', 'Inventario prom.', 'Estado'], align: ['l', 'l', 'c', 'r', 'r', 'r', 'l'],
+      rows: revisar.map(r => [r.sku, r.categoria, r.clase_abc, r.dias_inventario === null ? '—' : nf(r.dias_inventario, 0), r.rotacion === null ? '—' : nf(r.rotacion, 1) + '×', sol(r.inv_prom_valor), glifo(r.estado_inventario) + r.estado_inventario]) })));
+  root.append(el('h2', {}, 'Hallazgos'));
+  root.append(finds([
+    `<b>${nf(g.rotacion_global, 1)} rotaciones al año</b> (${nf(g.dias_inventario_global, 0)} días de cobertura). Los ${clsA.length} SKUs clase A concentran el 80% del costo de salidas, con una cobertura mediana de ${nf(medA, 0)} días.`,
+    `<b>${alto.length} SKUs superan 90 días</b> de cobertura y mantienen ${sol(invAlto)} en inventario promedio (${pct(100 * invAlto / g.inv_prom_valor, 0)} del total). Son los candidatos para frenar reposición.`,
+    `<b>${riesgo.length} SKU${riesgo.length === 1 ? '' : 's'} con menos de 30 días</b> de cobertura (riesgo de quiebre) y ${neg.length} con stock negativo en algún cierre, señal de movimientos faltantes que conviene auditar.`]));
+  root.append(defs([
+    'Costo de salidas = unidades de salida × costo unitario.',
+    'Inventario promedio = promedio de los 12 stocks de cierre mensual × costo unitario. Stock de cierre = stock inicial + acumulado de entradas − salidas.',
+    'Rotación = costo de salidas anual ÷ inventario promedio valorizado. Días de inventario = 365 ÷ rotación.',
+    'Clase ABC según el costo de salidas acumulado: A hasta 80%, B hasta 95%, C el resto.',
+    'Limpieza: se eliminan duplicados por id, se excluyen cantidades vacías, las negativas se toman en valor absoluto, las fechas se llevan a aaaa-mm-dd y los SKU se normalizan.']));
+  return root;
+}
+
+/* ---------- Proyecto 2 ---------- */
+function buildOtif() {
+  const p = D.p2, g = p.global, m = p.mensual, t = p.transportista, z = p.zona, mo = p.motivo;
+  const first = m[0], last = m[m.length - 1];
+  const tMax = t[0], tMin = t[t.length - 1], zMin = z[z.length - 1];
+  const top2 = mo[0].pct + mo[1].pct;
+  const root = el('div');
+  root.append(el('p', { class: 'q' }, '¿Qué porcentaje de pedidos llega a tiempo y completo, y dónde y por qué se pierde el servicio?'));
+  root.append(tiles(
+    tile('OTIF', nf(g.pct_otif, 1), '%', 'A tiempo y completo en el mismo pedido'),
+    tile('A tiempo', nf(g.pct_a_tiempo, 1), '%', 'Entrega ≤ fecha compromiso'),
+    tile('Completo', nf(g.pct_completo, 1), '%', 'Cantidad entregada ≥ pedida'),
+    tile('Fill rate', nf(g.fill_rate, 1), '%', `Unidades entregadas ÷ pedidas · ${nf(g.pedidos_evaluados)} pedidos`)));
+  root.append(grid(
+    card({ kind: 'line', wide: true, title: 'Evolución mensual del servicio', sub: 'Pedidos por mes de fecha compromiso.',
+      labels: m.map(r => mesLbl(r.mes)),
+      series: [{ name: 'OTIF', color: 'var(--s1)', values: m.map(r => r.pct_otif) },
+               { name: 'A tiempo', color: 'var(--s2)', values: m.map(r => r.pct_a_tiempo) },
+               { name: 'Completo', color: 'var(--s3)', values: m.map(r => r.pct_completo) }],
+      ymin: 65, ymax: 95, yfmt: pctTick, vfmt: v => pct(v) }),
+    card({ kind: 'bar', title: 'OTIF por transportista', labelHead: 'Transportista', tipTitle: 'OTIF', max: 100,
+      labels: t.map(r => r.transportista), values: t.map(r => r.pct_otif), xfmt: v => pct(v), axfmt: pctTick, axfmt: pctTick,
+      extra: t.map(r => `A tiempo: <b>${pct(r.pct_a_tiempo)}</b> · Completo: <b>${pct(r.pct_completo)}</b><br>${nf(r.pedidos)} pedidos`),
+      extraHead: ['A tiempo', 'Completo', 'Pedidos'], extraRows: t.map(r => [pct(r.pct_a_tiempo), pct(r.pct_completo), nf(r.pedidos)]) }),
+    card({ kind: 'bar', title: 'OTIF por zona de entrega', labelHead: 'Zona', tipTitle: 'OTIF', max: 100,
+      labels: z.map(r => r.zona), values: z.map(r => r.pct_otif), xfmt: v => pct(v), axfmt: pctTick,
+      extra: z.map(r => `A tiempo: <b>${pct(r.pct_a_tiempo)}</b> · Completo: <b>${pct(r.pct_completo)}</b><br>${nf(r.pedidos)} pedidos`),
+      extraHead: ['A tiempo', 'Completo', 'Pedidos'], extraRows: z.map(r => [pct(r.pct_a_tiempo), pct(r.pct_completo), nf(r.pedidos)]) }),
+    card({ kind: 'bar', wide: true, title: 'Causas de pedidos fallidos', sub: 'Pedidos que no fueron OTIF, ordenados de mayor a menor. Se muestra el aporte y el acumulado.', labelHead: 'Causa', tipTitle: 'Pedidos fallidos',
+      labels: mo.map(r => r.motivo), values: mo.map(r => r.pedidos_fallidos), xfmt: v => nf(v),
+      vlabel: mo.map(r => `${nf(r.pedidos_fallidos)} · ${pct(r.pct)} (acum. ${pct(r.pct_acumulado, 0)})`),
+      extra: mo.map(r => `Aporte: <b>${pct(r.pct)}</b> · Acumulado: <b>${pct(r.pct_acumulado)}</b>`),
+      extraHead: ['Aporte', 'Acumulado'], extraRows: mo.map(r => [pct(r.pct), pct(r.pct_acumulado)]) })));
+  root.append(el('h2', {}, 'Hallazgos'));
+  root.append(finds([
+    `<b>El OTIF subió de ${pct(first.pct_otif)} a ${pct(last.pct_otif)}</b> entre ${mesLbl(first.mes)} y ${mesLbl(last.mes)} (${nf(last.pct_otif - first.pct_otif, 1)} puntos), con mejora en puntualidad y en pedidos completos.`,
+    `<b>${tMax.transportista} cumple ${pct(tMax.pct_otif)}</b> frente a ${pct(tMin.pct_otif)} de ${tMin.transportista}. La brecha viene de la puntualidad (${pct(tMax.pct_a_tiempo, 0)} frente a ${pct(tMin.pct_a_tiempo, 0)}), no de pedidos incompletos.`,
+    `<b>${zMin.zona} llega a ${pct(zMin.pct_otif)}</b>, unos ${nf(z[0].pct_otif - zMin.pct_otif, 0)} puntos bajo la mejor zona. Las dos primeras causas (${mo[0].motivo.toLowerCase()} y ${mo[1].motivo.toLowerCase()}) explican el ${pct(top2, 0)} de las fallas.`]));
+  root.append(defs([
+    'A tiempo: fecha de entrega ≤ fecha compromiso. Completo: cantidad entregada ≥ cantidad pedida. OTIF: ambas a la vez, evaluado por pedido.',
+    'Fill rate = suma de min(entregado, pedido) ÷ suma de pedido, a nivel de unidades.',
+    'El mes se asigna por fecha compromiso. Solo se evalúan pedidos con compromiso dentro del periodo.',
+    'Se excluyen pedidos pendientes, con cantidad entregada vacía o con fechas invertidas. Los duplicados se eliminan por id y los transportistas se unifican.',
+    'Limitación: los pedidos de las últimas semanas con entrega aún pendiente quedan fuera, lo que puede favorecer levemente el último mes.']));
+  return root;
+}
+
+/* ---------- Proyecto 3 ---------- */
+function buildProd() {
+  const p = D.p3, g = p.global, sem = p.semanal, ops = p.operador, tu = p.turno;
+  const meta = { value: 100, label: 'Meta = 100%' };
+  const idx = sem.findIndex(r => r.semana_inicio >= '2026-06-29');
+  const per = p.periodo, ant = p.antiguedad;
+  const bajo = ops.filter(r => r.cumplimiento_meta_pct < 100);
+  const nocheT = tu.find(r => r.turno === 'Noche'), mañT = tu.find(r => r.turno === 'Mañana');
+  const root = el('div');
+  root.append(el('p', { class: 'q' }, '¿Cuántas líneas por hora pickea el equipo frente a la meta de cada zona, y qué turnos, zonas y operadores explican la brecha?'));
+  root.append(tiles(
+    tile('Líneas por hora', nf(g.lph, 1), '', `${nf(g.lineas)} líneas en ${nf(g.horas)} horas`),
+    tile('Cumplimiento de meta', nf(g.cumplimiento_meta_pct, 1), '%', 'Líneas reales ÷ líneas esperadas por zona'),
+    tile('Error de picking', nf(g.error_pct, 2), '%', 'Errores ÷ líneas'),
+    tile('Turnos sobre la meta', nf(g.pct_registros_sobre_meta, 1), '%', `${nf(g.registros)} registros operador-día`)));
+  root.append(grid(
+    card({ kind: 'line', wide: true, title: 'Cumplimiento semanal de la meta', sub: 'Por encima de 100% se supera la meta de líneas por hora de cada zona.',
+      labels: sem.map(r => diaLbl(r.semana_inicio)), series: [{ name: 'Cumplimiento de meta', color: 'var(--s1)', values: sem.map(r => r.cumplimiento_meta_pct) }],
+      ref: meta, mark: idx >= 0 ? { index: idx, label: 'Inicio del programa de mejora', short: 'Inicio mejora' } : null, ymin: 85, ymax: 120, yfmt: pctTick, vfmt: v => pct(v) }),
+    card({ kind: 'bar', title: 'Cumplimiento por turno', sub: '▼ indica bajo la meta.', labelHead: 'Turno', tipTitle: 'Cumplimiento de meta', ref: meta,
+      labels: tu.map(r => r.turno), values: tu.map(r => r.cumplimiento_meta_pct), xfmt: v => pct(v), axfmt: pctTick,
+      extra: tu.map(r => `${nf(r.lph, 1)} líneas/hora · error ${pct(r.error_pct, 2)}`), extraHead: ['Líneas/hora', 'Error'], extraRows: tu.map(r => [nf(r.lph, 1), pct(r.error_pct, 2)]) }),
+    card({ kind: 'bar', title: 'Cumplimiento por zona', sub: '▼ indica bajo la meta.', labelHead: 'Zona', tipTitle: 'Cumplimiento de meta', ref: meta,
+      labels: p.zona.map(r => r.zona), values: p.zona.map(r => r.cumplimiento_meta_pct), xfmt: v => pct(v), axfmt: pctTick,
+      extra: p.zona.map(r => `${nf(r.lph, 1)} líneas/hora (meta ${nf(r.meta_lph, 0)}) · error ${pct(r.error_pct, 2)}`), extraHead: ['Líneas/hora', 'Meta', 'Error'], extraRows: p.zona.map(r => [nf(r.lph, 1), nf(r.meta_lph, 0), pct(r.error_pct, 2)]) }),
+    card({ kind: 'bar', title: 'Cumplimiento por antigüedad', sub: 'Antigüedad del operador en la fecha del registro.', labelHead: 'Antigüedad', tipTitle: 'Cumplimiento de meta', ref: meta,
+      labels: ant.map(r => r.banda_antiguedad.slice(3)), values: ant.map(r => r.cumplimiento_meta_pct), xfmt: v => pct(v), axfmt: pctTick,
+      extra: ant.map(r => `Error ${pct(r.error_pct, 2)} · ${nf(r.registros)} registros`), extraHead: ['Error', 'Registros'], extraRows: ant.map(r => [pct(r.error_pct, 2), nf(r.registros)]) }),
+    card({ kind: 'bar', title: 'Cumplimiento por día de la semana', sub: 'Los lunes rinden menos que el resto.', labelHead: 'Día', tipTitle: 'Cumplimiento de meta', ref: meta, row: 28,
+      labels: p.dia.map(r => r.dia), values: p.dia.map(r => r.cumplimiento_meta_pct), xfmt: v => pct(v), axfmt: pctTick,
+      extra: p.dia.map(r => `Error ${pct(r.error_pct, 2)}`), extraHead: ['Error'], extraRows: p.dia.map(r => [pct(r.error_pct, 2)]) }),
+    card({ kind: 'bar', wide: true, title: 'Ranking de operadores', sub: 'Cumplimiento de meta ponderado por horas. ▼ indica bajo la meta.', labelHead: 'Operador', tipTitle: 'Cumplimiento de meta', ref: meta, row: 28,
+      labels: ops.map(r => `${r.id_operador} · ${r.turno}`), values: ops.map(r => r.cumplimiento_meta_pct), xfmt: v => pct(v), axfmt: pctTick,
+      extra: ops.map(r => `${r.zona_principal} · ${nf(r.lph, 1)} líneas/hora<br>Error ${pct(r.error_pct, 2)} · sobre meta ${pct(r.pct_dias_sobre_meta, 0)} de los días`),
+      extraHead: ['Zona principal', 'Líneas/hora', 'Error', 'Días sobre meta'], extraRows: ops.map(r => [r.zona_principal, nf(r.lph, 1), pct(r.error_pct, 2), pct(r.pct_dias_sobre_meta, 0)]) })));
+  root.append(el('h2', {}, 'Hallazgos'));
+  root.append(finds([
+    `<b>El cumplimiento pasó de ${pct(per[0].cumplimiento_meta_pct)} a ${pct(per[1].cumplimiento_meta_pct)}</b> desde julio, y el error bajó de ${pct(per[0].error_pct, 2)} a ${pct(per[1].error_pct, 2)}. Parte de la mejora también viene de la curva de aprendizaje de los operadores nuevos.`,
+    `<b>El turno noche cumple ${pct(nocheT.cumplimiento_meta_pct, 0)}</b> frente a ${pct(mañT.cumplimiento_meta_pct, 0)} del turno mañana, y tiene el error más alto (${pct(nocheT.error_pct, 2)}). Es la primera palanca de mejora.`,
+    `<b>${bajo.length} de ${ops.length} operadores quedan bajo la meta.</b> Con menos de 6 meses de antigüedad el cumplimiento es ${pct(ant[0].cumplimiento_meta_pct, 0)} y el error ${pct(ant[0].error_pct, 2)}, lo que apunta a capacitación y acompañamiento más que a sanciones.`]));
+  root.append(defs([
+    'Líneas por hora = suma de líneas ÷ suma de horas. Se pondera por horas; promediar los ratios diarios daría el mismo peso a un día de 3 horas que a uno de 8.',
+    'Cumplimiento de meta = suma de líneas ÷ suma de (horas × meta de la zona). Metas por zona: Pallet 36, Estantería 50, Flow rack 65, Refrigerado 32 líneas/hora.',
+    'Error de picking = errores ÷ líneas.',
+    'Se excluyen registros sin horas, con más de 12 horas (posible error de digitación), con líneas vacías o negativas. Los duplicados se eliminan por id y el turno se normaliza.',
+    'La comparación antes y después de julio no prueba causalidad: coinciden el cambio de programa y la maduración del equipo.']));
+  return root;
+}
+
+/* ---------- pestañas ---------- */
+const TABS = [['rotacion', buildRotacion], ['otif', buildOtif], ['prod', buildProd]];
+const panels = document.getElementById('panels');
+TABS.forEach(([k, fn]) => {
+  const pnl = el('section', { id: 'p-' + k, role: 'tabpanel', 'aria-labelledby': 't-' + k });
+  pnl.hidden = true; pnl.append(fn()); panels.append(pnl);
+});
+function select(k) {
+  if (!TABS.some(t => t[0] === k)) k = 'rotacion';
+  TABS.forEach(([id]) => {
+    const b = document.getElementById('t-' + id); b.setAttribute('aria-selected', id === k); b.tabIndex = id === k ? 0 : -1;
+    document.getElementById('p-' + id).hidden = id !== k;
+  });
+  try { history.replaceState(null, '', '#' + k); } catch (e) { }
+}
+TABS.forEach(([k]) => {
+  const b = document.getElementById('t-' + k);
+  b.addEventListener('click', () => select(k));
+  b.addEventListener('keydown', ev => {
+    const i = TABS.findIndex(t => t[0] === k);
+    if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') {
+      const nx = TABS[(i + (ev.key === 'ArrowRight' ? 1 : TABS.length - 1)) % TABS.length][0];
+      select(nx); document.getElementById('t-' + nx).focus();
+    }
+  });
+});
+select(location.hash.slice(1));
+</script>

@@ -1,0 +1,9 @@
+problema,filas,tratamiento
+Filas totales en bruto,5444,Referencia
+id_mov duplicado (filas sobrantes),35,Se conserva la primera aparición
+Cantidad nula o vacía,25,Se excluye: no se puede inferir la cantidad
+Cantidad negativa,15,Se toma el valor absoluto (error de signo; el tipo ya indica ENTRADA/SALIDA)
+Fecha en formato dd/mm/yyyy,120,Se convierte a yyyy-mm-dd
+SKU con espacios o minúsculas,40,TRIM + UPPER
+SKU sin match en maestro,0,Se excluiría (0 esperado)
+Filas finales en mov_limpio,5384,Base para los KPIs

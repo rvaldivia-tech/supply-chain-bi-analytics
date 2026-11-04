@@ -1,0 +1,419 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html{color-scheme:light}body{margin:0}</style></head><body><title>Portafolio Logístico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+/* Concepto: tablero de operaciones con tipografía de señalética de almacén (Barlow),
+   fondo gris azulado frío, una sola familia de acento azul y naranja solo como 2ª serie. */
+:root{
+  --bg:#f1f4f7; --surface:#ffffff; --ink:#13202c; --ink2:#44525f; --muted:#5b6977;
+  --line:#dbe2e9; --grid:#e7ecf1;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --tip:#13202c; --tipink:#f1f4f7;
+  --f-body:'Barlow',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-disp:'Barlow Condensed','Barlow',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1319; --surface:#151f29; --ink:#e8edf2; --ink2:#bac5d0; --muted:#8f9ba7;
+    --line:#25313c; --grid:#1f2a34;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+    --tip:#e8edf2; --tipink:#0d1319; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d1319; --surface:#151f29; --ink:#e8edf2; --ink2:#bac5d0; --muted:#8f9ba7;
+  --line:#25313c; --grid:#1f2a34;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+  --tip:#e8edf2; --tipink:#0d1319; color-scheme:dark;
+}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45}
+*{box-sizing:border-box}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:22px 48px}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 24px;margin-bottom:18px}
+h1{font-family:var(--f-disp);font-weight:700;font-size:clamp(28px,5vw,40px);letter-spacing:.01em;line-height:1.05;margin:0;text-wrap:balance}
+.lede{margin:6px 0 0;color:var(--ink2);max-width:60ch}
+.chip{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);background:var(--surface);padding:4px 10px;border-radius:99px;white-space:nowrap}
+nav.tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line);margin-bottom:18px}
+nav.tabs button{font:inherit;color:var(--muted);background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px 9px;cursor:pointer;text-align:left;white-space:nowrap}
+nav.tabs button b{display:block;font-family:var(--f-disp);font-weight:600;font-size:19px;letter-spacing:.01em;color:var(--ink2)}
+nav.tabs button span{font-size:12.5px}
+nav.tabs button[aria-selected="true"]{border-bottom-color:var(--s1)}
+nav.tabs button[aria-selected="true"] b{color:var(--ink)}
+button:focus-visible,summary:focus-visible{outline:2px solid var(--s1);outline-offset:2px}
+.q{margin:0 0 14px;color:var(--ink2);max-width:75ch}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px;margin-bottom:14px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;min-width:0}
+.tile .l{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tile .v{font-family:var(--f-disp);font-weight:600;font-size:44px;line-height:1.05;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.tile .v small{font-size:20px;font-weight:500;color:var(--ink2);margin-left:3px}
+.tile .d{font-size:13px;color:var(--ink2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:14px;margin-bottom:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px 12px;min-width:0}
+.card.wide{grid-column:1/-1}
+.ch{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+h3{margin:0;font-size:16px;font-weight:600}
+.sub{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.tg{font:inherit;font-size:12.5px;color:var(--ink2);background:none;border:1px solid var(--line);border-radius:4px;padding:3px 9px;cursor:pointer;white-space:nowrap}
+.tg[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 16px;margin:8px 0 0;font-size:13px;color:var(--ink2)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.plot{position:relative;margin-top:6px;min-height:40px}
+.plot svg{display:block;max-width:100%}
+.gl{stroke:var(--grid);stroke-width:1}
+.tx{fill:var(--muted);font-size:12px;font-family:var(--f-body);font-variant-numeric:tabular-nums}
+.tx2{fill:var(--ink2);font-size:12.5px;font-family:var(--f-body);font-variant-numeric:tabular-nums}
+.tx3{paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round;fill:var(--ink);font-size:13px;font-weight:500;font-family:var(--f-body);font-variant-numeric:tabular-nums}
+.ref{stroke:var(--ink2);stroke-width:1.25;stroke-dasharray:4 4}
+.cross{stroke:var(--muted);stroke-width:1}
+.tip{position:absolute;z-index:5;pointer-events:none;background:var(--tip);color:var(--tipink);border-radius:4px;padding:6px 9px;font-size:12.5px;line-height:1.4;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.tip i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.tw{overflow-x:auto;margin-top:8px;max-height:360px;overflow-y:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:left;padding:6px 10px;border-bottom:1px solid var(--line);white-space:nowrap;position:sticky;top:0;background:var(--surface)}
+td{padding:6px 10px;border-bottom:1px solid var(--grid);white-space:nowrap}
+.r{text-align:right}.c{text-align:center}.l{text-align:left}
+.find{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px 28px;margin:6px 0 14px;padding:0;list-style:none}
+.find li{color:var(--ink2);max-width:46ch}
+.find b{color:var(--ink);font-weight:600}
+h2{font-family:var(--f-disp);font-weight:600;font-size:22px;margin:22px 0 8px;letter-spacing:.01em}
+details{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 16px;color:var(--ink2)}
+summary{cursor:pointer;font-weight:500;color:var(--ink)}
+details ul{margin:8px 0 2px;padding-left:18px}
+details li{margin:3px 0}
+footer{margin-top:26px;color:var(--muted);font-size:13px;max-width:80ch}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Portafolio de analítica logística</h1>
+      <p class="lede">Tres proyectos con SQL sobre operaciones de almacén y distribución: rotación de inventario, nivel de servicio OTIF y productividad de picking.</p>
+    </div>
+    <span class="chip">Datos simulados</span>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Proyectos">
+    <button role="tab" id="t-rotacion" aria-controls="p-rotacion"><b>Rotación de inventario</b><span>oct 2025 – sep 2026</span></button>
+    <button role="tab" id="t-otif" aria-controls="p-otif"><b>Nivel de servicio OTIF</b><span>oct 2025 – sep 2026</span></button>
+    <button role="tab" id="t-prod" aria-controls="p-prod"><b>Productividad de picking</b><span>abr – sep 2026</span></button>
+  </nav>
+  <main id="panels"></main>
+  <footer>Los datos son ficticios y se generaron con errores de calidad a propósito (duplicados, nulos, fechas mezcladas) para practicar la limpieza. Los indicadores se calcularon con SQL en SQLite y se verificaron con un recálculo independiente en pandas.</footer>
+</div>
+
+<script>
+const D = {"p1": {"global": {"cogs_anual": 828724.82, "inv_prom_valor": 117502.06, "rotacion_global": 7.05, "dias_inventario_global": 52.0, "skus": 60}, "mensual": [{"mes": "2025-10", "cogs": 72088.79, "inventario_cierre_valor": 207017.43}, {"mes": "2025-11", "cogs": 67154.37, "inventario_cierre_valor": 173942.65}, {"mes": "2025-12", "cogs": 71700.61, "inventario_cierre_valor": 144642.51}, {"mes": "2026-01", "cogs": 71556.07, "inventario_cierre_valor": 108952.94}, {"mes": "2026-02", "cogs": 61623.81, "inventario_cierre_valor": 102584.52}, {"mes": "2026-03", "cogs": 72637.14, "inventario_cierre_valor": 93346.26}, {"mes": "2026-04", "cogs": 68777.41, "inventario_cierre_valor": 93677.52}, {"mes": "2026-05", "cogs": 67495.69, "inventario_cierre_valor": 111297.03}, {"mes": "2026-06", "cogs": 67629.66, "inventario_cierre_valor": 94390.66}, {"mes": "2026-07", "cogs": 70566.59, "inventario_cierre_valor": 106550.4}, {"mes": "2026-08", "cogs": 73192.52, "inventario_cierre_valor": 77818.87}, {"mes": "2026-09", "cogs": 64302.16, "inventario_cierre_valor": 95804.24}], "categoria": [{"categoria": "Bebidas", "skus": 14, "cogs": 217185.58, "inv_prom_valor": 26569.34, "rotacion": 8.17, "dias_inventario": 45.0}, {"categoria": "Cuidado Personal", "skus": 8, "cogs": 197134.02, "inv_prom_valor": 28346.19, "rotacion": 6.95, "dias_inventario": 52.0}, {"categoria": "Abarrotes", "skus": 12, "cogs": 163510.39, "inv_prom_valor": 23346.11, "rotacion": 7.0, "dias_inventario": 52.0}, {"categoria": "Snacks", "skus": 16, "cogs": 146975.43, "inv_prom_valor": 24895.01, "rotacion": 5.9, "dias_inventario": 62.0}, {"categoria": "Limpieza", "skus": 10, "cogs": 103919.4, "inv_prom_valor": 14345.41, "rotacion": 7.24, "dias_inventario": 50.0}], "sku": [{"sku": "SKU056", "descripcion": "Producto 056", "categoria": "Abarrotes", "costo_unitario": 12.82, "stock_inicial": 1502, "unidades_entrada": 6042, "unidades_salida": 6916, "cogs": 88663.12, "inv_prom_valor": 9569.06, "rotacion": 9.27, "dias_inventario": 39.0, "clase_abc": "A", "pct_cogs": 10.7, "stock_minimo": 218, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU030", "descripcion": "Producto 030", "categoria": "Cuidado Personal", "costo_unitario": 20.1, "stock_inicial": 2097, "unidades_entrada": 2848, "unidades_salida": 4230, "cogs": 85023.0, "inv_prom_valor": 13869.0, "rotacion": 6.13, "dias_inventario": 60.0, "clase_abc": "A", "pct_cogs": 10.26, "stock_minimo": 187, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU046", "descripcion": "Producto 046", "categoria": "Snacks", "costo_unitario": 4.63, "stock_inicial": 4469, "unidades_entrada": 10630, "unidades_salida": 13349, "cogs": 61805.87, "inv_prom_valor": 7497.9, "rotacion": 8.24, "dias_inventario": 44.0, "clase_abc": "A", "pct_cogs": 7.46, "stock_minimo": 688, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU055", "descripcion": "Producto 055", "categoria": "Bebidas", "costo_unitario": 9.34, "stock_inicial": 1081, "unidades_entrada": 5340, "unidades_salida": 5704, "cogs": 53275.36, "inv_prom_valor": 7572.4, "rotacion": 7.04, "dias_inventario": 52.0, "clase_abc": "A", "pct_cogs": 6.43, "stock_minimo": 218, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU009", "descripcion": "Producto 009", "categoria": "Limpieza", "costo_unitario": 5.58, "stock_inicial": 932, "unidades_entrada": 7590, "unidades_salida": 7912, "cogs": 44148.96, "inv_prom_valor": 5736.7, "rotacion": 7.7, "dias_inventario": 47.0, "clase_abc": "A", "pct_cogs": 5.33, "stock_minimo": 610, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU052", "descripcion": "Producto 052", "categoria": "Bebidas", "costo_unitario": 6.14, "stock_inicial": 854, "unidades_entrada": 6150, "unidades_salida": 6863, "cogs": 42138.82, "inv_prom_valor": -30.19, "rotacion": null, "dias_inventario": null, "clase_abc": "A", "pct_cogs": 5.08, "stock_minimo": -723, "meses_stock_negativo": 6, "estado_inventario": "Revisar: stock negativo"}, {"sku": "SKU035", "descripcion": "Producto 035", "categoria": "Bebidas", "costo_unitario": 11.43, "stock_inicial": 791, "unidades_entrada": 2220, "unidades_salida": 2588, "cogs": 29580.84, "inv_prom_valor": 3801.43, "rotacion": 7.78, "dias_inventario": 47.0, "clase_abc": "A", "pct_cogs": 3.57, "stock_minimo": 79, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU045", "descripcion": "Producto 045", "categoria": "Bebidas", "costo_unitario": 2.99, "stock_inicial": 2270, "unidades_entrada": 7296, "unidades_salida": 9197, "cogs": 27499.03, "inv_prom_valor": 2497.15, "rotacion": 11.01, "dias_inventario": 33.0, "clase_abc": "A", "pct_cogs": 3.32, "stock_minimo": 369, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU013", "descripcion": "Producto 013", "categoria": "Cuidado Personal", "costo_unitario": 12.35, "stock_inicial": 215, "unidades_entrada": 2023, "unidades_salida": 1977, "cogs": 24415.95, "inv_prom_valor": 2661.42, "rotacion": 9.17, "dias_inventario": 40.0, "clase_abc": "A", "pct_cogs": 2.95, "stock_minimo": 68, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU012", "descripcion": "Producto 012", "categoria": "Cuidado Personal", "costo_unitario": 16.92, "stock_inicial": 200, "unidades_entrada": 1449, "unidades_salida": 1411, "cogs": 23874.12, "inv_prom_valor": 2560.56, "rotacion": 9.32, "dias_inventario": 39.0, "clase_abc": "A", "pct_cogs": 2.88, "stock_minimo": 74, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU059", "descripcion": "Producto 059", "categoria": "Cuidado Personal", "costo_unitario": 14.64, "stock_inicial": 235, "unidades_entrada": 1110, "unidades_salida": 1270, "cogs": 18592.8, "inv_prom_valor": 2227.72, "rotacion": 8.35, "dias_inventario": 44.0, "clase_abc": "A", "pct_cogs": 2.24, "stock_minimo": 75, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU003", "descripcion": "Producto 003", "categoria": "Cuidado Personal", "costo_unitario": 19.05, "stock_inicial": 541, "unidades_entrada": 435, "unidades_salida": 876, "cogs": 16687.8, "inv_prom_valor": 3392.49, "rotacion": 4.92, "dias_inventario": 74.0, "clase_abc": "A", "pct_cogs": 2.01, "stock_minimo": 69, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU060", "descripcion": "Producto 060", "categoria": "Abarrotes", "costo_unitario": 13.39, "stock_inicial": 641, "unidades_entrada": 624, "unidades_salida": 1180, "cogs": 15800.2, "inv_prom_valor": 2278.53, "rotacion": 6.93, "dias_inventario": 53.0, "clase_abc": "A", "pct_cogs": 1.91, "stock_minimo": 70, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU041", "descripcion": "Producto 041", "categoria": "Bebidas", "costo_unitario": 9.52, "stock_inicial": 286, "unidades_entrada": 1644, "unidades_salida": 1653, "cogs": 15736.56, "inv_prom_valor": 2369.69, "rotacion": 6.64, "dias_inventario": 55.0, "clase_abc": "A", "pct_cogs": 1.9, "stock_minimo": 137, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU036", "descripcion": "Producto 036", "categoria": "Cuidado Personal", "costo_unitario": 9.72, "stock_inicial": 408, "unidades_entrada": 1374, "unidades_salida": 1501, "cogs": 14589.72, "inv_prom_valor": 1630.53, "rotacion": 8.95, "dias_inventario": 41.0, "clase_abc": "A", "pct_cogs": 1.76, "stock_minimo": 72, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU050", "descripcion": "Producto 050", "categoria": "Limpieza", "costo_unitario": 23.71, "stock_inicial": 63, "unidades_entrada": 496, "unidades_salida": 534, "cogs": 12661.14, "inv_prom_valor": 954.33, "rotacion": 13.27, "dias_inventario": 28.0, "clase_abc": "A", "pct_cogs": 1.53, "stock_minimo": 11, "meses_stock_negativo": 0, "estado_inventario": "Riesgo de quiebre (< 30 días)"}, {"sku": "SKU029", "descripcion": "Producto 029", "categoria": "Snacks", "costo_unitario": 6.53, "stock_inicial": 975, "unidades_entrada": 978, "unidades_salida": 1806, "cogs": 11793.18, "inv_prom_valor": 2564.66, "rotacion": 4.6, "dias_inventario": 79.0, "clase_abc": "A", "pct_cogs": 1.42, "stock_minimo": 147, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU023", "descripcion": "Producto 023", "categoria": "Abarrotes", "costo_unitario": 11.0, "stock_inicial": 461, "unidades_entrada": 800, "unidades_salida": 1048, "cogs": 11528.0, "inv_prom_valor": 2262.33, "rotacion": 5.1, "dias_inventario": 72.0, "clase_abc": "A", "pct_cogs": 1.39, "stock_minimo": 79, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU011", "descripcion": "Producto 011", "categoria": "Cuidado Personal", "costo_unitario": 35.8, "stock_inicial": 57, "unidades_entrada": 318, "unidades_salida": 317, "cogs": 11348.6, "inv_prom_valor": 1548.35, "rotacion": 7.33, "dias_inventario": 50.0, "clase_abc": "A", "pct_cogs": 1.37, "stock_minimo": 20, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU032", "descripcion": "Producto 032", "categoria": "Bebidas", "costo_unitario": 7.91, "stock_inicial": 278, "unidades_entrada": 1122, "unidades_salida": 1302, "cogs": 10298.82, "inv_prom_valor": 953.81, "rotacion": 10.8, "dias_inventario": 34.0, "clase_abc": "A", "pct_cogs": 1.24, "stock_minimo": 40, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU008", "descripcion": "Producto 008", "categoria": "Snacks", "costo_unitario": 3.7, "stock_inicial": 2071, "unidades_entrada": 966, "unidades_salida": 2709, "cogs": 10023.3, "inv_prom_valor": 2664.31, "rotacion": 3.76, "dias_inventario": 97.0, "clase_abc": "A", "pct_cogs": 1.21, "stock_minimo": 180, "meses_stock_negativo": 0, "estado_inventario": "Alto (91-180 días)"}, {"sku": "SKU017", "descripcion": "Producto 017", "categoria": "Snacks", "costo_unitario": 5.44, "stock_inicial": 168, "unidades_entrada": 1736, "unidades_salida": 1719, "cogs": 9351.36, "inv_prom_valor": 1180.03, "rotacion": 7.92, "dias_inventario": 46.0, "clase_abc": "A", "pct_cogs": 1.13, "stock_minimo": 100, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU054", "descripcion": "Producto 054", "categoria": "Abarrotes", "costo_unitario": 10.58, "stock_inicial": 153, "unidades_entrada": 744, "unidades_salida": 846, "cogs": 8950.68, "inv_prom_valor": 1082.69, "rotacion": 8.27, "dias_inventario": 44.0, "clase_abc": "A", "pct_cogs": 1.08, "stock_minimo": 51, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU007", "descripcion": "Producto 007", "categoria": "Limpieza", "costo_unitario": 18.43, "stock_inicial": 134, "unidades_entrada": 380, "unidades_salida": 475, "cogs": 8754.25, "inv_prom_valor": 1320.82, "rotacion": 6.63, "dias_inventario": 55.0, "clase_abc": "A", "pct_cogs": 1.06, "stock_minimo": 17, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU057", "descripcion": "Producto 057", "categoria": "Bebidas", "costo_unitario": 5.92, "stock_inicial": 960, "unidades_entrada": 615, "unidades_salida": 1440, "cogs": 8524.8, "inv_prom_valor": 1988.13, "rotacion": 4.29, "dias_inventario": 85.0, "clase_abc": "A", "pct_cogs": 1.03, "stock_minimo": 76, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU040", "descripcion": "Producto 040", "categoria": "Abarrotes", "costo_unitario": 13.33, "stock_inicial": 537, "unidades_entrada": 112, "unidades_salida": 636, "cogs": 8477.88, "inv_prom_valor": 2821.52, "rotacion": 3.0, "dias_inventario": 121.0, "clase_abc": "B", "pct_cogs": 1.02, "stock_minimo": 13, "meses_stock_negativo": 0, "estado_inventario": "Alto (91-180 días)"}, {"sku": "SKU034", "descripcion": "Producto 034", "categoria": "Abarrotes", "costo_unitario": 8.21, "stock_inicial": 469, "unidades_entrada": 704, "unidades_salida": 1027, "cogs": 8431.67, "inv_prom_valor": 1605.74, "rotacion": 5.25, "dias_inventario": 70.0, "clase_abc": "B", "pct_cogs": 1.02, "stock_minimo": 59, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU051", "descripcion": "Producto 051", "categoria": "Snacks", "costo_unitario": 4.92, "stock_inicial": 1365, "unidades_entrada": 325, "unidades_salida": 1661, "cogs": 8172.12, "inv_prom_valor": 2535.03, "rotacion": 3.22, "dias_inventario": 113.0, "clase_abc": "B", "pct_cogs": 0.99, "stock_minimo": 29, "meses_stock_negativo": 0, "estado_inventario": "Alto (91-180 días)"}, {"sku": "SKU058", "descripcion": "Producto 058", "categoria": "Limpieza", "costo_unitario": 15.19, "stock_inicial": 134, "unidades_entrada": 474, "unidades_salida": 536, "cogs": 8141.84, "inv_prom_valor": 1041.78, "rotacion": 7.82, "dias_inventario": 47.0, "clase_abc": "B", "pct_cogs": 0.98, "stock_minimo": 40, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU010", "descripcion": "Producto 010", "categoria": "Abarrotes", "costo_unitario": 7.17, "stock_inicial": 232, "unidades_entrada": 920, "unidades_salida": 1111, "cogs": 7965.87, "inv_prom_valor": 918.95, "rotacion": 8.67, "dias_inventario": 42.0, "clase_abc": "B", "pct_cogs": 0.96, "stock_minimo": 41, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU001", "descripcion": "Producto 001", "categoria": "Snacks", "costo_unitario": 2.26, "stock_inicial": 485, "unidades_entrada": 2995, "unidades_salida": 3236, "cogs": 7313.36, "inv_prom_valor": 1052.97, "rotacion": 6.95, "dias_inventario": 53.0, "clase_abc": "B", "pct_cogs": 0.88, "stock_minimo": 244, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU043", "descripcion": "Producto 043", "categoria": "Limpieza", "costo_unitario": 14.37, "stock_inicial": 324, "unidades_entrada": 351, "unidades_salida": 503, "cogs": 7228.11, "inv_prom_valor": 2005.81, "rotacion": 3.6, "dias_inventario": 101.0, "clase_abc": "B", "pct_cogs": 0.87, "stock_minimo": 61, "meses_stock_negativo": 0, "estado_inventario": "Alto (91-180 días)"}, {"sku": "SKU015", "descripcion": "Producto 015", "categoria": "Bebidas", "costo_unitario": 11.51, "stock_inicial": 129, "unidades_entrada": 585, "unidades_salida": 591, "cogs": 6802.41, "inv_prom_valor": 932.31, "rotacion": 7.3, "dias_inventario": 50.0, "clase_abc": "B", "pct_cogs": 0.82, "stock_minimo": 33, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU044", "descripcion": "Producto 044", "categoria": "Snacks", "costo_unitario": 7.11, "stock_inicial": 159, "unidades_entrada": 912, "unidades_salida": 936, "cogs": 6654.96, "inv_prom_valor": 793.95, "rotacion": 8.38, "dias_inventario": 44.0, "clase_abc": "B", "pct_cogs": 0.8, "stock_minimo": 50, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU025", "descripcion": "Producto 025", "categoria": "Snacks", "costo_unitario": 5.5, "stock_inicial": 362, "unidades_entrada": 875, "unidades_salida": 1078, "cogs": 5929.0, "inv_prom_valor": 852.04, "rotacion": 6.96, "dias_inventario": 52.0, "clase_abc": "B", "pct_cogs": 0.72, "stock_minimo": 57, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU005", "descripcion": "Producto 005", "categoria": "Snacks", "costo_unitario": 5.87, "stock_inicial": 566, "unidades_entrada": 516, "unidades_salida": 957, "cogs": 5617.59, "inv_prom_valor": 1412.22, "rotacion": 3.98, "dias_inventario": 92.0, "clase_abc": "B", "pct_cogs": 0.68, "stock_minimo": 13, "meses_stock_negativo": 0, "estado_inventario": "Alto (91-180 días)"}, {"sku": "SKU048", "descripcion": "Producto 048", "categoria": "Bebidas", "costo_unitario": 7.4, "stock_inicial": 426, "unidades_entrada": 364, "unidades_salida": 721, "cogs": 5335.4, "inv_prom_valor": 1241.97, "rotacion": 4.3, "dias_inventario": 85.0, "clase_abc": "B", "pct_cogs": 0.64, "stock_minimo": 69, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU020", "descripcion": "Producto 020", "categoria": "Limpieza", "costo_unitario": 11.28, "stock_inicial": 20, "unidades_entrada": 504, "unidades_salida": 465, "cogs": 5245.2, "inv_prom_valor": 463.42, "rotacion": 11.32, "dias_inventario": 32.0, "clase_abc": "B", "pct_cogs": 0.63, "stock_minimo": 23, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU021", "descripcion": "Producto 021", "categoria": "Limpieza", "costo_unitario": 5.54, "stock_inicial": 391, "unidades_entrada": 680, "unidades_salida": 904, "cogs": 5008.16, "inv_prom_valor": 972.73, "rotacion": 5.15, "dias_inventario": 71.0, "clase_abc": "B", "pct_cogs": 0.6, "stock_minimo": 50, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU016", "descripcion": "Producto 016", "categoria": "Snacks", "costo_unitario": 4.2, "stock_inicial": 432, "unidades_entrada": 815, "unidades_salida": 1185, "cogs": 4977.0, "inv_prom_valor": 778.05, "rotacion": 6.4, "dias_inventario": 57.0, "clase_abc": "B", "pct_cogs": 0.6, "stock_minimo": 36, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU037", "descripcion": "Producto 037", "categoria": "Bebidas", "costo_unitario": 8.39, "stock_inicial": 216, "unidades_entrada": 376, "unidades_salida": 556, "cogs": 4664.84, "inv_prom_valor": 746.01, "rotacion": 6.25, "dias_inventario": 58.0, "clase_abc": "B", "pct_cogs": 0.56, "stock_minimo": 35, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU039", "descripcion": "Producto 039", "categoria": "Snacks", "costo_unitario": 6.08, "stock_inicial": 64, "unidades_entrada": 880, "unidades_salida": 737, "cogs": 4480.96, "inv_prom_valor": 800.53, "rotacion": 5.6, "dias_inventario": 65.0, "clase_abc": "B", "pct_cogs": 0.54, "stock_minimo": 63, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU042", "descripcion": "Producto 042", "categoria": "Limpieza", "costo_unitario": 23.02, "stock_inicial": 25, "unidades_entrada": 180, "unidades_salida": 194, "cogs": 4465.88, "inv_prom_valor": 633.05, "rotacion": 7.05, "dias_inventario": 52.0, "clase_abc": "B", "pct_cogs": 0.54, "stock_minimo": 11, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU004", "descripcion": "Producto 004", "categoria": "Limpieza", "costo_unitario": 17.7, "stock_inicial": 26, "unidades_entrada": 258, "unidades_salida": 244, "cogs": 4318.8, "inv_prom_valor": 564.92, "rotacion": 7.64, "dias_inventario": 48.0, "clase_abc": "B", "pct_cogs": 0.52, "stock_minimo": 9, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU014", "descripcion": "Producto 014", "categoria": "Bebidas", "costo_unitario": 4.46, "stock_inicial": 583, "unidades_entrada": 441, "unidades_salida": 903, "cogs": 4027.38, "inv_prom_valor": 1023.2, "rotacion": 3.94, "dias_inventario": 93.0, "clase_abc": "B", "pct_cogs": 0.49, "stock_minimo": 69, "meses_stock_negativo": 0, "estado_inventario": "Alto (91-180 días)"}, {"sku": "SKU031", "descripcion": "Producto 031", "categoria": "Limpieza", "costo_unitario": 7.99, "stock_inicial": 67, "unidades_entrada": 510, "unidades_salida": 494, "cogs": 3947.06, "inv_prom_valor": 651.85, "rotacion": 6.06, "dias_inventario": 60.0, "clase_abc": "C", "pct_cogs": 0.48, "stock_minimo": 53, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU028", "descripcion": "Producto 028", "categoria": "Bebidas", "costo_unitario": 3.88, "stock_inicial": 1078, "unidades_entrada": 0, "unidades_salida": 1004, "cogs": 3895.52, "inv_prom_valor": 2573.09, "rotacion": 1.51, "dias_inventario": 241.0, "clase_abc": "C", "pct_cogs": 0.47, "stock_minimo": 74, "meses_stock_negativo": 0, "estado_inventario": "Exceso (> 180 días)"}, {"sku": "SKU053", "descripcion": "Producto 053", "categoria": "Abarrotes", "costo_unitario": 5.94, "stock_inicial": 123, "unidades_entrada": 632, "unidades_salida": 648, "cogs": 3849.12, "inv_prom_valor": 761.81, "rotacion": 5.05, "dias_inventario": 72.0, "clase_abc": "C", "pct_cogs": 0.46, "stock_minimo": 17, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU047", "descripcion": "Producto 047", "categoria": "Snacks", "costo_unitario": 1.4, "stock_inicial": 1169, "unidades_entrada": 1644, "unidades_salida": 2523, "cogs": 3532.2, "inv_prom_valor": 480.55, "rotacion": 7.35, "dias_inventario": 50.0, "clase_abc": "C", "pct_cogs": 0.43, "stock_minimo": 130, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU038", "descripcion": "Producto 038", "categoria": "Snacks", "costo_unitario": 3.45, "stock_inicial": 979, "unidades_entrada": 177, "unidades_salida": 1010, "cogs": 3484.5, "inv_prom_valor": 1626.1, "rotacion": 2.14, "dias_inventario": 170.0, "clase_abc": "C", "pct_cogs": 0.42, "stock_minimo": 85, "meses_stock_negativo": 0, "estado_inventario": "Alto (91-180 días)"}, {"sku": "SKU002", "descripcion": "Producto 002", "categoria": "Bebidas", "costo_unitario": 5.11, "stock_inicial": 111, "unidades_entrada": 535, "unidades_salida": 604, "cogs": 3086.44, "inv_prom_valor": 399.86, "rotacion": 7.72, "dias_inventario": 47.0, "clase_abc": "C", "pct_cogs": 0.37, "stock_minimo": 0, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU049", "descripcion": "Producto 049", "categoria": "Abarrotes", "costo_unitario": 8.66, "stock_inicial": 199, "unidades_entrada": 255, "unidades_salida": 351, "cogs": 3039.66, "inv_prom_valor": 936.72, "rotacion": 3.24, "dias_inventario": 112.0, "clase_abc": "C", "pct_cogs": 0.37, "stock_minimo": 44, "meses_stock_negativo": 0, "estado_inventario": "Alto (91-180 días)"}, {"sku": "SKU018", "descripcion": "Producto 018", "categoria": "Abarrotes", "costo_unitario": 3.43, "stock_inicial": 444, "unidades_entrada": 460, "unidades_salida": 859, "cogs": 2946.37, "inv_prom_valor": 543.08, "rotacion": 5.43, "dias_inventario": 67.0, "clase_abc": "C", "pct_cogs": 0.36, "stock_minimo": 45, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU022", "descripcion": "Producto 022", "categoria": "Cuidado Personal", "costo_unitario": 7.09, "stock_inicial": 90, "unidades_entrada": 352, "unidades_salida": 367, "cogs": 2602.03, "inv_prom_valor": 456.12, "rotacion": 5.7, "dias_inventario": 64.0, "clase_abc": "C", "pct_cogs": 0.31, "stock_minimo": 30, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU027", "descripcion": "Producto 027", "categoria": "Bebidas", "costo_unitario": 3.84, "stock_inicial": 285, "unidades_entrada": 405, "unidades_salida": 604, "cogs": 2319.36, "inv_prom_valor": 500.48, "rotacion": 4.63, "dias_inventario": 79.0, "clase_abc": "C", "pct_cogs": 0.28, "stock_minimo": 38, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU026", "descripcion": "Producto 026", "categoria": "Abarrotes", "costo_unitario": 4.17, "stock_inicial": 90, "unidades_entrada": 490, "unidades_salida": 546, "cogs": 2276.82, "inv_prom_valor": 305.8, "rotacion": 7.45, "dias_inventario": 49.0, "clase_abc": "C", "pct_cogs": 0.27, "stock_minimo": 34, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU019", "descripcion": "Producto 019", "categoria": "Snacks", "costo_unitario": 1.71, "stock_inicial": 34, "unidades_entrada": 1002, "unidades_salida": 956, "cogs": 1634.76, "inv_prom_valor": 174.56, "rotacion": 9.36, "dias_inventario": 39.0, "clase_abc": "C", "pct_cogs": 0.2, "stock_minimo": 37, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU033", "descripcion": "Producto 033", "categoria": "Abarrotes", "costo_unitario": 3.1, "stock_inicial": 232, "unidades_entrada": 340, "unidades_salida": 510, "cogs": 1581.0, "inv_prom_valor": 259.88, "rotacion": 6.08, "dias_inventario": 60.0, "clase_abc": "C", "pct_cogs": 0.19, "stock_minimo": 0, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}, {"sku": "SKU024", "descripcion": "Producto 024", "categoria": "Snacks", "costo_unitario": 2.03, "stock_inicial": 452, "unidades_entrada": 176, "unidades_salida": 545, "cogs": 1106.35, "inv_prom_valor": 368.95, "rotacion": 3.0, "dias_inventario": 122.0, "clase_abc": "C", "pct_cogs": 0.13, "stock_minimo": 77, "meses_stock_negativo": 0, "estado_inventario": "Alto (91-180 días)"}, {"sku": "SKU006", "descripcion": "Producto 006", "categoria": "Snacks", "costo_unitario": 1.66, "stock_inicial": 202, "unidades_entrada": 460, "unidades_salida": 662, "cogs": 1098.92, "inv_prom_valor": 113.16, "rotacion": 9.71, "dias_inventario": 38.0, "clase_abc": "C", "pct_cogs": 0.13, "stock_minimo": 0, "meses_stock_negativo": 0, "estado_inventario": "Saludable (30-90 días)"}], "abc": [{"clase": "A", "skus": 25, "pct_cogs": 80.3, "dias_mediana": 47.0}, {"clase": "B", "skus": 20, "pct_cogs": 14.9, "dias_mediana": 57.5}, {"clase": "C", "skus": 15, "pct_cogs": 4.9, "dias_mediana": 64.0}]}, "p2": {"global": {"pedidos_evaluados": 5735, "pct_a_tiempo": 87.1, "pct_completo": 88.9, "pct_otif": 77.4, "fill_rate": 96.9, "lead_time_prom": 2.5}, "mensual": [{"mes": "2025-10", "pedidos": 445, "pct_a_tiempo": 81.8, "pct_completo": 88.1, "pct_otif": 71.5, "fill_rate": 96.6, "lead_time_prom": 2.53}, {"mes": "2025-11", "pedidos": 499, "pct_a_tiempo": 85.0, "pct_completo": 82.8, "pct_otif": 70.7, "fill_rate": 95.3, "lead_time_prom": 2.54}, {"mes": "2025-12", "pedidos": 479, "pct_a_tiempo": 84.6, "pct_completo": 86.8, "pct_otif": 73.5, "fill_rate": 96.8, "lead_time_prom": 2.6}, {"mes": "2026-01", "pedidos": 463, "pct_a_tiempo": 82.3, "pct_completo": 87.5, "pct_otif": 71.5, "fill_rate": 96.1, "lead_time_prom": 2.58}, {"mes": "2026-02", "pedidos": 421, "pct_a_tiempo": 86.5, "pct_completo": 89.8, "pct_otif": 77.4, "fill_rate": 97.8, "lead_time_prom": 2.41}, {"mes": "2026-03", "pedidos": 480, "pct_a_tiempo": 88.1, "pct_completo": 87.9, "pct_otif": 76.9, "fill_rate": 96.7, "lead_time_prom": 2.5}, {"mes": "2026-04", "pedidos": 489, "pct_a_tiempo": 87.7, "pct_completo": 88.5, "pct_otif": 77.3, "fill_rate": 97.0, "lead_time_prom": 2.52}, {"mes": "2026-05", "pedidos": 512, "pct_a_tiempo": 88.9, "pct_completo": 90.0, "pct_otif": 79.9, "fill_rate": 97.0, "lead_time_prom": 2.55}, {"mes": "2026-06", "pedidos": 436, "pct_a_tiempo": 89.9, "pct_completo": 89.7, "pct_otif": 81.0, "fill_rate": 96.6, "lead_time_prom": 2.41}, {"mes": "2026-07", "pedidos": 552, "pct_a_tiempo": 89.9, "pct_completo": 91.7, "pct_otif": 82.2, "fill_rate": 97.7, "lead_time_prom": 2.47}, {"mes": "2026-08", "pedidos": 487, "pct_a_tiempo": 89.3, "pct_completo": 92.2, "pct_otif": 83.0, "fill_rate": 97.8, "lead_time_prom": 2.46}, {"mes": "2026-09", "pedidos": 472, "pct_a_tiempo": 90.3, "pct_completo": 91.3, "pct_otif": 82.6, "fill_rate": 97.6, "lead_time_prom": 2.48}], "transportista": [{"transportista": "Flota propia", "pedidos": 2104, "pct_a_tiempo": 95.0, "pct_completo": 89.2, "pct_otif": 84.5, "retraso_prom_dias": 1.84}, {"transportista": "RapidoLima", "pedidos": 1583, "pct_a_tiempo": 92.7, "pct_completo": 88.8, "pct_otif": 82.4, "retraso_prom_dias": 1.77}, {"transportista": "TransAndes", "pedidos": 1554, "pct_a_tiempo": 74.9, "pct_completo": 88.4, "pct_otif": 66.3, "retraso_prom_dias": 1.72}, {"transportista": "LogiSur", "pedidos": 494, "pct_a_tiempo": 73.7, "pct_completo": 89.3, "pct_otif": 65.8, "retraso_prom_dias": 1.67}], "zona": [{"zona": "Lima Sur", "pedidos": 1121, "pct_a_tiempo": 92.5, "pct_completo": 89.3, "pct_otif": 82.6}, {"zona": "Callao", "pedidos": 886, "pct_a_tiempo": 91.1, "pct_completo": 91.2, "pct_otif": 82.6}, {"zona": "Lima Centro", "pedidos": 994, "pct_a_tiempo": 90.3, "pct_completo": 89.4, "pct_otif": 81.0}, {"zona": "Lima Norte", "pedidos": 1610, "pct_a_tiempo": 91.7, "pct_completo": 87.0, "pct_otif": 79.8}, {"zona": "Provincia", "pedidos": 1124, "pct_a_tiempo": 69.0, "pct_completo": 88.9, "pct_otif": 61.3}], "motivo": [{"motivo": "Quiebre de stock", "pedidos_fallidos": 357, "pct": 27.5, "pct_acumulado": 27.5}, {"motivo": "Retraso de transporte", "pedidos_fallidos": 310, "pct": 23.9, "pct_acumulado": 51.4}, {"motivo": "Error de picking", "pedidos_fallidos": 162, "pct": 12.5, "pct_acumulado": 63.9}, {"motivo": "Tráfico o clima", "pedidos_fallidos": 138, "pct": 10.6, "pct_acumulado": 74.5}, {"motivo": "Cliente no disponible", "pedidos_fallidos": 119, "pct": 9.2, "pct_acumulado": 83.7}, {"motivo": "Producto dañado", "pedidos_fallidos": 119, "pct": 9.2, "pct_acumulado": 92.8}, {"motivo": "Documentación incompleta", "pedidos_fallidos": 93, "pct": 7.2, "pct_acumulado": 100.0}]}, "p3": {"global": {"registros": 1979, "lineas": 599076, "horas": 13189.5, "lph": 45.4, "uph": 453.8, "error_pct": 0.64, "cumplimiento_meta_pct": 104.9, "pct_registros_sobre_meta": 60.9}, "semanal": [{"semana_inicio": "2026-03-30", "lph": 43.6, "error_pct": 0.68, "cumplimiento_meta_pct": 100.0}, {"semana_inicio": "2026-04-06", "lph": 43.6, "error_pct": 0.67, "cumplimiento_meta_pct": 101.1}, {"semana_inicio": "2026-04-13", "lph": 43.7, "error_pct": 0.69, "cumplimiento_meta_pct": 100.2}, {"semana_inicio": "2026-04-20", "lph": 43.2, "error_pct": 0.76, "cumplimiento_meta_pct": 99.3}, {"semana_inicio": "2026-04-27", "lph": 44.0, "error_pct": 0.72, "cumplimiento_meta_pct": 101.7}, {"semana_inicio": "2026-05-04", "lph": 45.2, "error_pct": 0.77, "cumplimiento_meta_pct": 102.2}, {"semana_inicio": "2026-05-11", "lph": 42.8, "error_pct": 0.74, "cumplimiento_meta_pct": 98.3}, {"semana_inicio": "2026-05-18", "lph": 41.4, "error_pct": 0.71, "cumplimiento_meta_pct": 100.4}, {"semana_inicio": "2026-05-25", "lph": 43.9, "error_pct": 0.63, "cumplimiento_meta_pct": 101.5}, {"semana_inicio": "2026-06-01", "lph": 43.8, "error_pct": 0.67, "cumplimiento_meta_pct": 100.2}, {"semana_inicio": "2026-06-08", "lph": 43.1, "error_pct": 0.7, "cumplimiento_meta_pct": 100.0}, {"semana_inicio": "2026-06-15", "lph": 43.4, "error_pct": 0.71, "cumplimiento_meta_pct": 101.2}, {"semana_inicio": "2026-06-22", "lph": 43.6, "error_pct": 0.63, "cumplimiento_meta_pct": 100.7}, {"semana_inicio": "2026-06-29", "lph": 43.7, "error_pct": 0.71, "cumplimiento_meta_pct": 107.1}, {"semana_inicio": "2026-07-06", "lph": 46.8, "error_pct": 0.63, "cumplimiento_meta_pct": 108.0}, {"semana_inicio": "2026-07-13", "lph": 47.3, "error_pct": 0.64, "cumplimiento_meta_pct": 110.4}, {"semana_inicio": "2026-07-20", "lph": 48.6, "error_pct": 0.56, "cumplimiento_meta_pct": 108.9}, {"semana_inicio": "2026-07-27", "lph": 47.6, "error_pct": 0.66, "cumplimiento_meta_pct": 108.9}, {"semana_inicio": "2026-08-03", "lph": 48.0, "error_pct": 0.55, "cumplimiento_meta_pct": 108.8}, {"semana_inicio": "2026-08-10", "lph": 48.6, "error_pct": 0.58, "cumplimiento_meta_pct": 110.8}, {"semana_inicio": "2026-08-17", "lph": 46.0, "error_pct": 0.62, "cumplimiento_meta_pct": 108.3}, {"semana_inicio": "2026-08-24", "lph": 47.7, "error_pct": 0.5, "cumplimiento_meta_pct": 108.4}, {"semana_inicio": "2026-08-31", "lph": 47.1, "error_pct": 0.55, "cumplimiento_meta_pct": 110.1}, {"semana_inicio": "2026-09-07", "lph": 48.0, "error_pct": 0.58, "cumplimiento_meta_pct": 108.3}, {"semana_inicio": "2026-09-14", "lph": 47.0, "error_pct": 0.5, "cumplimiento_meta_pct": 107.9}, {"semana_inicio": "2026-09-21", "lph": 48.1, "error_pct": 0.49, "cumplimiento_meta_pct": 109.8}, {"semana_inicio": "2026-09-28", "lph": 46.9, "error_pct": 0.63, "cumplimiento_meta_pct": 111.1}], "periodo": [{"periodo": "Antes (abr-jun)", "lph": 43.5, "error_pct": 0.7, "cumplimiento_meta_pct": 100.5}, {"periodo": "Después (jul-sep)", "lph": 47.4, "error_pct": 0.58, "cumplimiento_meta_pct": 109.2}], "turno": [{"turno": "Mañana", "lph": 48.5, "error_pct": 0.58, "cumplimiento_meta_pct": 111.6}, {"turno": "Tarde", "lph": 48.3, "error_pct": 0.67, "cumplimiento_meta_pct": 107.6}, {"turno": "Noche", "lph": 34.5, "error_pct": 0.73, "cumplimiento_meta_pct": 85.5}], "zona": [{"zona": "Flow rack", "meta_lph": 65.0, "lph": 70.2, "error_pct": 0.6, "cumplimiento_meta_pct": 108.0}, {"zona": "Estantería", "meta_lph": 50.0, "lph": 53.3, "error_pct": 0.63, "cumplimiento_meta_pct": 106.5}, {"zona": "Pallet", "meta_lph": 36.0, "lph": 37.7, "error_pct": 0.67, "cumplimiento_meta_pct": 104.8}, {"zona": "Refrigerado", "meta_lph": 32.0, "lph": 31.2, "error_pct": 0.64, "cumplimiento_meta_pct": 97.6}], "dia": [{"dia": "Lun", "dia_num": 1, "cumplimiento_meta_pct": 98.9, "error_pct": 0.64}, {"dia": "Mar", "dia_num": 2, "cumplimiento_meta_pct": 106.9, "error_pct": 0.61}, {"dia": "Mié", "dia_num": 3, "cumplimiento_meta_pct": 108.6, "error_pct": 0.66}, {"dia": "Jue", "dia_num": 4, "cumplimiento_meta_pct": 107.6, "error_pct": 0.7}, {"dia": "Vie", "dia_num": 5, "cumplimiento_meta_pct": 104.1, "error_pct": 0.6}, {"dia": "Sáb", "dia_num": 6, "cumplimiento_meta_pct": 102.5, "error_pct": 0.61}], "antiguedad": [{"banda_antiguedad": "1. Menos de 6 meses", "registros": 189, "cumplimiento_meta_pct": 84.9, "error_pct": 0.81}, {"banda_antiguedad": "2. 6 a 17 meses", "registros": 404, "cumplimiento_meta_pct": 105.9, "error_pct": 0.56}, {"banda_antiguedad": "3. 18 meses o más", "registros": 1386, "cumplimiento_meta_pct": 106.9, "error_pct": 0.65}], "operador": [{"id_operador": "OP02", "turno": "Mañana", "zona_principal": "Estantería", "dias": 136, "lph": 62.8, "cumplimiento_meta_pct": 128.9, "error_pct": 0.66, "pct_dias_sobre_meta": 100.0, "ranking": 1}, {"id_operador": "OP07", "turno": "Tarde", "zona_principal": "Pallet", "dias": 141, "lph": 47.5, "cumplimiento_meta_pct": 124.0, "error_pct": 0.78, "pct_dias_sobre_meta": 100.0, "ranking": 2}, {"id_operador": "OP01", "turno": "Mañana", "zona_principal": "Refrigerado", "dias": 146, "lph": 42.2, "cumplimiento_meta_pct": 117.9, "error_pct": 0.58, "pct_dias_sobre_meta": 99.3, "ranking": 3}, {"id_operador": "OP06", "turno": "Mañana", "zona_principal": "Pallet", "dias": 143, "lph": 45.4, "cumplimiento_meta_pct": 117.0, "error_pct": 0.59, "pct_dias_sobre_meta": 97.2, "ranking": 4}, {"id_operador": "OP05", "turno": "Mañana", "zona_principal": "Estantería", "dias": 143, "lph": 55.2, "cumplimiento_meta_pct": 110.6, "error_pct": 0.53, "pct_dias_sobre_meta": 86.7, "ranking": 5}, {"id_operador": "OP08", "turno": "Tarde", "zona_principal": "Flow rack", "dias": 142, "lph": 67.7, "cumplimiento_meta_pct": 109.5, "error_pct": 0.61, "pct_dias_sobre_meta": 83.8, "ranking": 6}, {"id_operador": "OP10", "turno": "Tarde", "zona_principal": "Pallet", "dias": 139, "lph": 41.4, "cumplimiento_meta_pct": 108.5, "error_pct": 0.62, "pct_dias_sobre_meta": 81.3, "ranking": 7}, {"id_operador": "OP03", "turno": "Mañana", "zona_principal": "Estantería", "dias": 142, "lph": 51.8, "cumplimiento_meta_pct": 106.5, "error_pct": 0.5, "pct_dias_sobre_meta": 76.8, "ranking": 8}, {"id_operador": "OP09", "turno": "Tarde", "zona_principal": "Estantería", "dias": 141, "lph": 50.7, "cumplimiento_meta_pct": 104.9, "error_pct": 0.64, "pct_dias_sobre_meta": 73.0, "ranking": 9}, {"id_operador": "OP13", "turno": "Noche", "zona_principal": "Refrigerado", "dias": 145, "lph": 35.1, "cumplimiento_meta_pct": 94.3, "error_pct": 0.79, "pct_dias_sobre_meta": 26.9, "ranking": 10}, {"id_operador": "OP11", "turno": "Tarde", "zona_principal": "Pallet", "dias": 142, "lph": 33.9, "cumplimiento_meta_pct": 90.1, "error_pct": 0.75, "pct_dias_sobre_meta": 14.1, "ranking": 11}, {"id_operador": "OP12", "turno": "Noche", "zona_principal": "Estantería", "dias": 141, "lph": 43.3, "cumplimiento_meta_pct": 89.1, "error_pct": 0.74, "pct_dias_sobre_meta": 6.4, "ranking": 12}, {"id_operador": "OP04", "turno": "Mañana", "zona_principal": "Pallet", "dias": 138, "lph": 34.3, "cumplimiento_meta_pct": 86.8, "error_pct": 0.59, "pct_dias_sobre_meta": 5.8, "ranking": 13}, {"id_operador": "OP14", "turno": "Noche", "zona_principal": "Refrigerado", "dias": 140, "lph": 24.9, "cumplimiento_meta_pct": 70.9, "error_pct": 0.61, "pct_dias_sobre_meta": 0.0, "ranking": 14}]}};
+const NS = 'http://www.w3.org/2000/svg';
+const el = (t, a = {}, ...c) => { const e = document.createElement(t); for (const k in a) { if (k === 'class') e.className = a[k]; else if (k === 'html') e.innerHTML = a[k]; else e.setAttribute(k, a[k]); } c.flat().forEach(x => e.append(x)); return e; };
+const nf = (v, d = 0) => Number(v).toLocaleString('es-PE', { minimumFractionDigits: d, maximumFractionDigits: d });
+const pct = (v, d = 1) => nf(v, d) + '%';
+const sol = v => 'S/ ' + nf(v);
+const solK = v => 'S/ ' + nf(v / 1000) + 'k';
+const MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+const mesLbl = m => MES[+m.slice(5, 7) - 1] + ' ' + m.slice(2, 4);
+const diaLbl = d => d.slice(8, 10) + ' ' + MES[+d.slice(5, 7) - 1];
+const med = a => { const s = [...a].sort((x, y) => x - y), h = s.length >> 1; return s.length % 2 ? s[h] : (s[h - 1] + s[h]) / 2; };
+
+function niceTicks(min, max, n = 5) {
+  if (min === max) { max = min + 1; }
+  const step0 = (max - min) / (n - 1), mag = Math.pow(10, Math.floor(Math.log10(step0))), e = step0 / mag;
+  const step = (e <= 1.5 ? 1 : e <= 3 ? 2 : e <= 7 ? 5 : 10) * mag;
+  const lo = Math.floor(min / step + 1e-9) * step, hi = Math.ceil(max / step - 1e-9) * step, t = [];
+  for (let v = lo; v <= hi + step / 2; v += step) t.push(+v.toFixed(10));
+  return t;
+}
+const tableHTML = (head, rows, align = []) =>
+  '<table><thead><tr>' + head.map((h, i) => `<th class="${align[i] || (i ? 'r' : 'l')}">${h}</th>`).join('') + '</tr></thead><tbody>' +
+  rows.map(r => '<tr>' + r.map((c, i) => `<td class="${align[i] || (i ? 'r' : 'l')}">${c}</td>`).join('') + '</tr>').join('') + '</tbody></table>';
+
+function showTip(host, html, x, y, flip) {
+  let t = host.querySelector('.tip');
+  if (!t) { t = el('div', { class: 'tip' }); host.append(t); }
+  t.innerHTML = html; t.hidden = false;
+  const w = t.offsetWidth, hw = host.clientWidth;
+  let left = flip ? x - w - 12 : x + 12;
+  left = Math.max(0, Math.min(left, hw - w));
+  t.style.left = left + 'px'; t.style.top = Math.max(0, y) + 'px';
+}
+const hideTip = host => { const t = host.querySelector('.tip'); if (t) t.hidden = true; };
+
+/* ---------- línea ---------- */
+function drawLine(host, s) {
+  if (!host.clientWidth) return;
+  const W = Math.max(280, Math.floor(host.clientWidth)), H = s.h || 250, n = s.labels.length;
+  const endLab = W > 600 && s.series.length > 1;
+  const m = { l: 52, r: endLab ? 100 : 28, t: s.mark ? 28 : 14, b: 28 };
+  const iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const vals = s.series.flatMap(x => x.values).concat(s.ref ? [s.ref.value] : []);
+  const ticks = niceTicks(s.ymin ?? Math.min(...vals), s.ymax ?? Math.max(...vals), 5);
+  const lo = ticks[0], hi = ticks[ticks.length - 1];
+  const X = i => m.l + (n === 1 ? iw / 2 : iw * i / (n - 1)), Y = v => m.t + ih * (1 - (v - lo) / (hi - lo));
+  let g = '';
+  ticks.forEach(t => { g += `<line class="gl" x1="${m.l}" x2="${W - m.r}" y1="${Y(t)}" y2="${Y(t)}"/><text class="tx" x="${m.l - 8}" y="${Y(t) + 4}" text-anchor="end">${s.yfmt(t)}</text>`; });
+  const every = Math.max(1, Math.ceil(n / Math.max(2, Math.floor(iw / 64))));
+  s.labels.forEach((l, i) => { if (i % every === 0) g += `<text class="tx" x="${X(i)}" y="${H - 8}" text-anchor="middle">${l}</text>`; });
+  if (s.ref) g += `<line class="ref" x1="${m.l}" x2="${W - m.r}" y1="${Y(s.ref.value)}" y2="${Y(s.ref.value)}"/><text class="tx2" x="${m.l + 6}" y="${Y(s.ref.value) - 6}">${s.ref.label}</text>`;
+  if (s.mark) g += `<line class="ref" x1="${X(s.mark.index)}" x2="${X(s.mark.index)}" y1="${m.t - 8}" y2="${m.t + ih}"/><text class="tx2" x="${X(s.mark.index) + 6}" y="${m.t - 2}">${W < 520 ? s.mark.short : s.mark.label}</text>`;
+  s.series.forEach(se => {
+    const d = se.values.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ',' + Y(v).toFixed(1)).join('');
+    g += `<path d="${d}" fill="none" stroke="${se.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+    const li = se.values.length - 1;
+    g += `<circle cx="${X(li)}" cy="${Y(se.values[li])}" r="4" fill="${se.color}" stroke="var(--surface)" stroke-width="2"/>`;
+  });
+  if (endLab) {
+    const items = s.series.map(se => ({ se, y: Y(se.values[se.values.length - 1]) + 4 })).sort((a, b) => a.y - b.y);
+    for (let i = 1; i < items.length; i++) if (items[i].y - items[i - 1].y < 15) items[i].y = items[i - 1].y + 15;
+    items.forEach(it => { g += `<text class="tx2" x="${X(n - 1) + 11}" y="${it.y}">${it.se.short || it.se.name}</text>`; });
+  }
+  g += `<line class="cross" id="cx" y1="${m.t}" y2="${m.t + ih}" visibility="hidden"/><g id="hv"></g><rect id="hit" x="${m.l}" y="0" width="${iw}" height="${H}" fill="transparent" style="touch-action:pan-y"/>`;
+  host.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${s.title}">${g}</svg>`;
+  const svg = host.querySelector('svg'), cx = svg.querySelector('#cx'), hv = svg.querySelector('#hv'), hit = svg.querySelector('#hit');
+  const move = ev => {
+    const r = svg.getBoundingClientRect(), px = ev.clientX - r.left;
+    const i = Math.max(0, Math.min(n - 1, Math.round((px - m.l) / iw * (n - 1))));
+    cx.setAttribute('x1', X(i)); cx.setAttribute('x2', X(i)); cx.setAttribute('visibility', 'visible');
+    hv.innerHTML = s.series.map(se => `<circle cx="${X(i)}" cy="${Y(se.values[i])}" r="4" fill="${se.color}" stroke="var(--surface)" stroke-width="2"/>`).join('');
+    const html = `<b>${s.labels[i]}</b><br>` + s.series.map(se => `<i style="background:${se.color}"></i>${se.name}: <b>${(s.vfmt || s.yfmt)(se.values[i])}</b>`).join('<br>');
+    showTip(host, html, X(i), m.t, i > (n - 1) / 2);
+  };
+  hit.addEventListener('pointermove', move); hit.addEventListener('pointerdown', move);
+  hit.addEventListener('pointerleave', () => { cx.setAttribute('visibility', 'hidden'); hv.innerHTML = ''; hideTip(host); });
+}
+
+/* ---------- barras horizontales ---------- */
+function drawBars(host, s) {
+  if (!host.clientWidth) return;
+  const W = Math.max(280, Math.floor(host.clientWidth)), n = s.labels.length, row = s.row || 30;
+  const lw = Math.min(Math.max(...s.labels.map(l => l.length)) * 7.8 + 16, W * 0.44, 190);
+  const m = { l: lw, r: 78, t: 6, b: 24 };
+  const H = m.t + m.b + n * row, iw = W - m.l - m.r;
+  const top = Math.max(...s.values, s.ref ? s.ref.value : 0) * 1.04;
+  const ticks = niceTicks(0, s.max ?? top, iw < 300 ? 3 : 5); const hi = ticks[ticks.length - 1];
+  const X = v => m.l + iw * v / hi;
+  let g = '';
+  ticks.forEach(t => { g += `<line class="gl" x1="${X(t)}" x2="${X(t)}" y1="${m.t}" y2="${H - m.b}"/><text class="tx" x="${X(t)}" y="${H - 8}" text-anchor="middle">${(s.axfmt || s.xfmt)(t)}</text>`; });
+  const bh = Math.min(18, row - 10);
+  s.labels.forEach((l, i) => {
+    const y = m.t + i * row + (row - bh) / 2, w = Math.max(0, X(s.values[i]) - m.l), r = Math.min(4, bh / 2, w);
+    const path = w < 1 ? '' : `M${m.l},${y}h${w - r}a${r},${r} 0 0 1 ${r},${r}v${bh - 2 * r}a${r},${r} 0 0 1 ${-r},${r}h${-(w - r)}z`;
+    const low = s.ref && s.values[i] < s.ref.value;
+    g += `<text class="tx3" x="${m.l - 8}" y="${y + bh / 2 + 4.5}" text-anchor="end">${l}</text>`;
+    g += `<path d="${path}" fill="${s.color || 'var(--s1)'}"/>`;
+    g += `<text class="tx3" x="${m.l + w + 6}" y="${y + bh / 2 + 4.5}">${low ? '▼ ' : ''}${s.vlabel ? s.vlabel[i] : s.xfmt(s.values[i])}</text>`;
+    g += `<rect class="hb" data-i="${i}" x="0" y="${m.t + i * row}" width="${W}" height="${row}" fill="transparent"/>`;
+  });
+  if (s.ref) g += `<line class="ref" x1="${X(s.ref.value)}" x2="${X(s.ref.value)}" y1="${m.t}" y2="${H - m.b}"/>`;
+  host.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${s.title}">${g}</svg>`;
+  host.querySelectorAll('.hb').forEach(r => {
+    const show = ev => { const i = +r.dataset.i; showTip(host, `<b>${s.labels[i]}</b><br>${s.tipTitle || 'Valor'}: <b>${s.xfmt(s.values[i])}</b>` + (s.extra ? '<br>' + s.extra[i] : ''), Math.min(X(s.values[i]) + 10, W * 0.6), m.t + i * row - 4, X(s.values[i]) > W * 0.6); };
+    r.addEventListener('pointermove', show); r.addEventListener('pointerdown', show); r.addEventListener('pointerleave', () => hideTip(host));
+  });
+}
+
+/* ---------- tarjetas ---------- */
+function card(s) {
+  const c = el('section', { class: 'card' + (s.wide ? ' wide' : '') });
+  const btn = el('button', { class: 'tg', type: 'button', 'aria-pressed': 'false' }, 'Ver tabla');
+  c.append(el('div', { class: 'ch' }, el('div', {}, el('h3', {}, s.title), s.sub ? el('p', { class: 'sub' }, s.sub) : ''), s.kind === 'table' ? '' : btn));
+  if (s.kind === 'table') {
+    c.append(el('div', { class: 'tw', html: tableHTML(s.head, s.rows, s.align) }));
+    return c;
+  }
+  if (s.series && s.series.length > 1) c.append(el('div', { class: 'legend', html: s.series.map(x => `<span><i style="background:${x.color}"></i>${x.name}</span>`).join('') }));
+  const host = el('div', { class: 'plot' }), tw = el('div', { class: 'tw' });
+  tw.hidden = true;
+  let head, rows;
+  if (s.kind === 'line') { head = ['Periodo', ...s.series.map(x => x.name)]; rows = s.labels.map((l, i) => [l, ...s.series.map(x => (s.vfmt || s.yfmt)(x.values[i]))]); }
+  else { head = [s.labelHead || '', s.tipTitle || 'Valor', ...(s.extraHead || [])]; rows = s.labels.map((l, i) => [l, s.xfmt(s.values[i]), ...(s.extraRows ? s.extraRows[i] : [])]); }
+  tw.innerHTML = tableHTML(head, rows);
+  c.append(host, tw);
+  const draw = () => (s.kind === 'line' ? drawLine : drawBars)(host, s);
+  new ResizeObserver(draw).observe(host);
+  btn.addEventListener('click', () => {
+    const on = btn.getAttribute('aria-pressed') !== 'true';
+    btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Ver gráfico' : 'Ver tabla';
+    host.hidden = on; tw.hidden = !on; if (!on) draw();
+  });
+  return c;
+}
+const tile = (l, v, u, d) => el('div', { class: 'tile' }, el('div', { class: 'l' }, l), el('div', { class: 'v', html: v + (u ? `<small>${u}</small>` : '') }), el('div', { class: 'd' }, d));
+const tiles = (...t) => el('div', { class: 'tiles' }, t);
+const grid = (...c) => el('div', { class: 'grid' }, c);
+const finds = a => el('ul', { class: 'find', html: a.map(x => `<li>${x}</li>`).join('') });
+const defs = a => el('details', {}, el('summary', {}, 'Cómo se calcula'), el('ul', { html: a.map(x => `<li>${x}</li>`).join('') }));
+const pctTick = v => nf(v, 0) + '%';
+
+/* ---------- Proyecto 1 ---------- */
+function buildRotacion() {
+  const p = D.p1, g = p.global, sk = p.sku;
+  const alto = sk.filter(r => r.dias_inventario > 90), invAlto = alto.reduce((a, r) => a + r.inv_prom_valor, 0);
+  const riesgo = sk.filter(r => r.dias_inventario !== null && r.dias_inventario < 30);
+  const clsA = sk.filter(r => r.clase_abc === 'A'), medA = med(clsA.map(r => r.dias_inventario).filter(v => v !== null));
+  const neg = sk.filter(r => r.meses_stock_negativo > 0);
+  const mensual = p.mensual;
+  const orden = { 'Revisar': 0, 'Riesgo': 1, 'Exceso': 2, 'Alto': 3 };
+  const glifo = e => e.startsWith('Revisar') ? '● ' : e.startsWith('Riesgo') ? '▼ ' : e.startsWith('Exceso') ? '■ ' : '▲ ';
+  const revisar = sk.filter(r => !r.estado_inventario.startsWith('Saludable'))
+    .sort((a, b) => orden[a.estado_inventario.split(' ')[0]] - orden[b.estado_inventario.split(' ')[0]] || (b.dias_inventario ?? 0) - (a.dias_inventario ?? 0));
+  const root = el('div');
+  root.append(el('p', { class: 'q' }, '¿Cuántas veces rota el inventario, cuántos días de cobertura hay y qué SKUs inmovilizan capital o están cerca del quiebre?'));
+  root.append(tiles(
+    tile('Rotación anual', nf(g.rotacion_global, 1), '×', 'Costo de salidas ÷ inventario promedio'),
+    tile('Días de inventario', nf(g.dias_inventario_global, 0), 'días', '365 ÷ rotación'),
+    tile('Costo de salidas', solK(g.cogs_anual), '', '12 meses, valorizado a costo'),
+    tile('Inventario promedio', solK(g.inv_prom_valor), '', 'Promedio de 12 cierres mensuales')));
+  root.append(grid(
+    card({ kind: 'line', wide: true, title: 'Inventario al cierre y costo de salidas por mes', sub: 'Ambas series en soles. El inventario inicial incluía exceso que se fue consumiendo.',
+      labels: mensual.map(r => mesLbl(r.mes)),
+      series: [{ name: 'Inventario al cierre', short: 'Inventario', color: 'var(--s1)', values: mensual.map(r => r.inventario_cierre_valor) },
+               { name: 'Costo de salidas del mes', short: 'Salidas', color: 'var(--s2)', values: mensual.map(r => r.cogs) }],
+      ymin: 0, yfmt: solK, vfmt: sol }),
+    card({ kind: 'bar', title: 'Días de inventario por categoría', sub: 'Menos días significa rotación más rápida.', labelHead: 'Categoría', tipTitle: 'Días de inventario',
+      labels: p.categoria.map(r => r.categoria), values: p.categoria.map(r => r.dias_inventario), xfmt: v => nf(v, 0),
+      extra: p.categoria.map(r => `Rotación: <b>${nf(r.rotacion, 1)}×</b> · ${r.skus} SKUs`),
+      extraHead: ['Rotación (×)', 'SKUs'], extraRows: p.categoria.map(r => [nf(r.rotacion, 1), r.skus]) }),
+    card({ kind: 'bar', title: 'Costo de salidas por clase ABC', sub: 'Porcentaje del costo anual de salidas.', labelHead: 'Clase', tipTitle: '% del costo de salidas',
+      labels: p.abc.map(r => `${r.clase} · ${r.skus} SKUs`), values: p.abc.map(r => r.pct_cogs), xfmt: v => pct(v, v % 1 ? 1 : 0), axfmt: pctTick,
+      extra: p.abc.map(r => `Cobertura mediana: <b>${nf(r.dias_mediana, 0)} días</b>`), extraHead: ['Cobertura mediana (días)'], extraRows: p.abc.map(r => [nf(r.dias_mediana, 0)]) }),
+    card({ kind: 'table', wide: true, title: 'SKUs para revisar', sub: `${revisar.length} de ${sk.length} SKUs fuera del rango saludable (30 a 90 días). ▲ alto · ■ exceso · ▼ riesgo de quiebre · ● revisar datos.`,
+      head: ['SKU', 'Categoría', 'ABC', 'Días', 'Rotación', 'Inventario prom.', 'Estado'], align: ['l', 'l', 'c', 'r', 'r', 'r', 'l'],
+      rows: revisar.map(r => [r.sku, r.categoria, r.clase_abc, r.dias_inventario === null ? '—' : nf(r.dias_inventario, 0), r.rotacion === null ? '—' : nf(r.rotacion, 1) + '×', sol(r.inv_prom_valor), glifo(r.estado_inventario) + r.estado_inventario]) })));
+  root.append(el('h2', {}, 'Hallazgos'));
+  root.append(finds([
+    `<b>${nf(g.rotacion_global, 1)} rotaciones al año</b> (${nf(g.dias_inventario_global, 0)} días de cobertura). Los ${clsA.length} SKUs clase A concentran el 80% del costo de salidas, con una cobertura mediana de ${nf(medA, 0)} días.`,
+    `<b>${alto.length} SKUs superan 90 días</b> de cobertura y mantienen ${sol(invAlto)} en inventario promedio (${pct(100 * invAlto / g.inv_prom_valor, 0)} del total). Son los candidatos para frenar reposición.`,
+    `<b>${riesgo.length} SKU${riesgo.length === 1 ? '' : 's'} con menos de 30 días</b> de cobertura (riesgo de quiebre) y ${neg.length} con stock negativo en algún cierre, señal de movimientos faltantes que conviene auditar.`]));
+  root.append(defs([
+    'Costo de salidas = unidades de salida × costo unitario.',
+    'Inventario promedio = promedio de los 12 stocks de cierre mensual × costo unitario. Stock de cierre = stock inicial + acumulado de entradas − salidas.',
+    'Rotación = costo de salidas anual ÷ inventario promedio valorizado. Días de inventario = 365 ÷ rotación.',
+    'Clase ABC según el costo de salidas acumulado: A hasta 80%, B hasta 95%, C el resto.',
+    'Limpieza: se eliminan duplicados por id, se excluyen cantidades vacías, las negativas se toman en valor absoluto, las fechas se llevan a aaaa-mm-dd y los SKU se normalizan.']));
+  return root;
+}
+
+/* ---------- Proyecto 2 ---------- */
+function buildOtif() {
+  const p = D.p2, g = p.global, m = p.mensual, t = p.transportista, z = p.zona, mo = p.motivo;
+  const first = m[0], last = m[m.length - 1];
+  const tMax = t[0], tMin = t[t.length - 1], zMin = z[z.length - 1];
+  const top2 = mo[0].pct + mo[1].pct;
+  const root = el('div');
+  root.append(el('p', { class: 'q' }, '¿Qué porcentaje de pedidos llega a tiempo y completo, y dónde y por qué se pierde el servicio?'));
+  root.append(tiles(
+    tile('OTIF', nf(g.pct_otif, 1), '%', 'A tiempo y completo en el mismo pedido'),
+    tile('A tiempo', nf(g.pct_a_tiempo, 1), '%', 'Entrega ≤ fecha compromiso'),
+    tile('Completo', nf(g.pct_completo, 1), '%', 'Cantidad entregada ≥ pedida'),
+    tile('Fill rate', nf(g.fill_rate, 1), '%', `Unidades entregadas ÷ pedidas · ${nf(g.pedidos_evaluados)} pedidos`)));
+  root.append(grid(
+    card({ kind: 'line', wide: true, title: 'Evolución mensual del servicio', sub: 'Pedidos por mes de fecha compromiso.',
+      labels: m.map(r => mesLbl(r.mes)),
+      series: [{ name: 'OTIF', color: 'var(--s1)', values: m.map(r => r.pct_otif) },
+               { name: 'A tiempo', color: 'var(--s2)', values: m.map(r => r.pct_a_tiempo) },
+               { name: 'Completo', color: 'var(--s3)', values: m.map(r => r.pct_completo) }],
+      ymin: 65, ymax: 95, yfmt: pctTick, vfmt: v => pct(v) }),
+    card({ kind: 'bar', title: 'OTIF por transportista', labelHead: 'Transportista', tipTitle: 'OTIF', max: 100,
+      labels: t.map(r => r.transportista), values: t.map(r => r.pct_otif), xfmt: v => pct(v), axfmt: pctTick, axfmt: pctTick,
+      extra: t.map(r => `A tiempo: <b>${pct(r.pct_a_tiempo)}</b> · Completo: <b>${pct(r.pct_completo)}</b><br>${nf(r.pedidos)} pedidos`),
+      extraHead: ['A tiempo', 'Completo', 'Pedidos'], extraRows: t.map(r => [pct(r.pct_a_tiempo), pct(r.pct_completo), nf(r.pedidos)]) }),
+    card({ kind: 'bar', title: 'OTIF por zona de entrega', labelHead: 'Zona', tipTitle: 'OTIF', max: 100,
+      labels: z.map(r => r.zona), values: z.map(r => r.pct_otif), xfmt: v => pct(v), axfmt: pctTick,
+      extra: z.map(r => `A tiempo: <b>${pct(r.pct_a_tiempo)}</b> · Completo: <b>${pct(r.pct_completo)}</b><br>${nf(r.pedidos)} pedidos`),
+      extraHead: ['A tiempo', 'Completo', 'Pedidos'], extraRows: z.map(r => [pct(r.pct_a_tiempo), pct(r.pct_completo), nf(r.pedidos)]) }),
+    card({ kind: 'bar', wide: true, title: 'Causas de pedidos fallidos', sub: 'Pedidos que no fueron OTIF, ordenados de mayor a menor. Se muestra el aporte y el acumulado.', labelHead: 'Causa', tipTitle: 'Pedidos fallidos',
+      labels: mo.map(r => r.motivo), values: mo.map(r => r.pedidos_fallidos), xfmt: v => nf(v),
+      vlabel: mo.map(r => `${nf(r.pedidos_fallidos)} · ${pct(r.pct)} (acum. ${pct(r.pct_acumulado, 0)})`),
+      extra: mo.map(r => `Aporte: <b>${pct(r.pct)}</b> · Acumulado: <b>${pct(r.pct_acumulado)}</b>`),
+      extraHead: ['Aporte', 'Acumulado'], extraRows: mo.map(r => [pct(r.pct), pct(r.pct_acumulado)]) })));
+  root.append(el('h2', {}, 'Hallazgos'));
+  root.append(finds([
+    `<b>El OTIF subió de ${pct(first.pct_otif)} a ${pct(last.pct_otif)}</b> entre ${mesLbl(first.mes)} y ${mesLbl(last.mes)} (${nf(last.pct_otif - first.pct_otif, 1)} puntos), con mejora en puntualidad y en pedidos completos.`,
+    `<b>${tMax.transportista} cumple ${pct(tMax.pct_otif)}</b> frente a ${pct(tMin.pct_otif)} de ${tMin.transportista}. La brecha viene de la puntualidad (${pct(tMax.pct_a_tiempo, 0)} frente a ${pct(tMin.pct_a_tiempo, 0)}), no de pedidos incompletos.`,
+    `<b>${zMin.zona} llega a ${pct(zMin.pct_otif)}</b>, unos ${nf(z[0].pct_otif - zMin.pct_otif, 0)} puntos bajo la mejor zona. Las dos primeras causas (${mo[0].motivo.toLowerCase()} y ${mo[1].motivo.toLowerCase()}) explican el ${pct(top2, 0)} de las fallas.`]));
+  root.append(defs([
+    'A tiempo: fecha de entrega ≤ fecha compromiso. Completo: cantidad entregada ≥ cantidad pedida. OTIF: ambas a la vez, evaluado por pedido.',
+    'Fill rate = suma de min(entregado, pedido) ÷ suma de pedido, a nivel de unidades.',
+    'El mes se asigna por fecha compromiso. Solo se evalúan pedidos con compromiso dentro del periodo.',
+    'Se excluyen pedidos pendientes, con cantidad entregada vacía o con fechas invertidas. Los duplicados se eliminan por id y los transportistas se unifican.',
+    'Limitación: los pedidos de las últimas semanas con entrega aún pendiente quedan fuera, lo que puede favorecer levemente el último mes.']));
+  return root;
+}
+
+/* ---------- Proyecto 3 ---------- */
+function buildProd() {
+  const p = D.p3, g = p.global, sem = p.semanal, ops = p.operador, tu = p.turno;
+  const meta = { value: 100, label: 'Meta = 100%' };
+  const idx = sem.findIndex(r => r.semana_inicio >= '2026-06-29');
+  const per = p.periodo, ant = p.antiguedad;
+  const bajo = ops.filter(r => r.cumplimiento_meta_pct < 100);
+  const nocheT = tu.find(r => r.turno === 'Noche'), mañT = tu.find(r => r.turno === 'Mañana');
+  const root = el('div');
+  root.append(el('p', { class: 'q' }, '¿Cuántas líneas por hora pickea el equipo frente a la meta de cada zona, y qué turnos, zonas y operadores explican la brecha?'));
+  root.append(tiles(
+    tile('Líneas por hora', nf(g.lph, 1), '', `${nf(g.lineas)} líneas en ${nf(g.horas)} horas`),
+    tile('Cumplimiento de meta', nf(g.cumplimiento_meta_pct, 1), '%', 'Líneas reales ÷ líneas esperadas por zona'),
+    tile('Error de picking', nf(g.error_pct, 2), '%', 'Errores ÷ líneas'),
+    tile('Turnos sobre la meta', nf(g.pct_registros_sobre_meta, 1), '%', `${nf(g.registros)} registros operador-día`)));
+  root.append(grid(
+    card({ kind: 'line', wide: true, title: 'Cumplimiento semanal de la meta', sub: 'Por encima de 100% se supera la meta de líneas por hora de cada zona.',
+      labels: sem.map(r => diaLbl(r.semana_inicio)), series: [{ name: 'Cumplimiento de meta', color: 'var(--s1)', values: sem.map(r => r.cumplimiento_meta_pct) }],
+      ref: meta, mark: idx >= 0 ? { index: idx, label: 'Inicio del programa de mejora', short: 'Inicio mejora' } : null, ymin: 85, ymax: 120, yfmt: pctTick, vfmt: v => pct(v) }),
+    card({ kind: 'bar', title: 'Cumplimiento por turno', sub: '▼ indica bajo la meta.', labelHead: 'Turno', tipTitle: 'Cumplimiento de meta', ref: meta,
+      labels: tu.map(r => r.turno), values: tu.map(r => r.cumplimiento_meta_pct), xfmt: v => pct(v), axfmt: pctTick,
+      extra: tu.map(r => `${nf(r.lph, 1)} líneas/hora · error ${pct(r.error_pct, 2)}`), extraHead: ['Líneas/hora', 'Error'], extraRows: tu.map(r => [nf(r.lph, 1), pct(r.error_pct, 2)]) }),
+    card({ kind: 'bar', title: 'Cumplimiento por zona', sub: '▼ indica bajo la meta.', labelHead: 'Zona', tipTitle: 'Cumplimiento de meta', ref: meta,
+      labels: p.zona.map(r => r.zona), values: p.zona.map(r => r.cumplimiento_meta_pct), xfmt: v => pct(v), axfmt: pctTick,
+      extra: p.zona.map(r => `${nf(r.lph, 1)} líneas/hora (meta ${nf(r.meta_lph, 0)}) · error ${pct(r.error_pct, 2)}`), extraHead: ['Líneas/hora', 'Meta', 'Error'], extraRows: p.zona.map(r => [nf(r.lph, 1), nf(r.meta_lph, 0), pct(r.error_pct, 2)]) }),
+    card({ kind: 'bar', title: 'Cumplimiento por antigüedad', sub: 'Antigüedad del operador en la fecha del registro.', labelHead: 'Antigüedad', tipTitle: 'Cumplimiento de meta', ref: meta,
+      labels: ant.map(r => r.banda_antiguedad.slice(3)), values: ant.map(r => r.cumplimiento_meta_pct), xfmt: v => pct(v), axfmt: pctTick,
+      extra: ant.map(r => `Error ${pct(r.error_pct, 2)} · ${nf(r.registros)} registros`), extraHead: ['Error', 'Registros'], extraRows: ant.map(r => [pct(r.error_pct, 2), nf(r.registros)]) }),
+    card({ kind: 'bar', title: 'Cumplimiento por día de la semana', sub: 'Los lunes rinden menos que el resto.', labelHead: 'Día', tipTitle: 'Cumplimiento de meta', ref: meta, row: 28,
+      labels: p.dia.map(r => r.dia), values: p.dia.map(r => r.cumplimiento_meta_pct), xfmt: v => pct(v), axfmt: pctTick,
+      extra: p.dia.map(r => `Error ${pct(r.error_pct, 2)}`), extraHead: ['Error'], extraRows: p.dia.map(r => [pct(r.error_pct, 2)]) }),
+    card({ kind: 'bar', wide: true, title: 'Ranking de operadores', sub: 'Cumplimiento de meta ponderado por horas. ▼ indica bajo la meta.', labelHead: 'Operador', tipTitle: 'Cumplimiento de meta', ref: meta, row: 28,
+      labels: ops.map(r => `${r.id_operador} · ${r.turno}`), values: ops.map(r => r.cumplimiento_meta_pct), xfmt: v => pct(v), axfmt: pctTick,
+      extra: ops.map(r => `${r.zona_principal} · ${nf(r.lph, 1)} líneas/hora<br>Error ${pct(r.error_pct, 2)} · sobre meta ${pct(r.pct_dias_sobre_meta, 0)} de los días`),
+      extraHead: ['Zona principal', 'Líneas/hora', 'Error', 'Días sobre meta'], extraRows: ops.map(r => [r.zona_principal, nf(r.lph, 1), pct(r.error_pct, 2), pct(r.pct_dias_sobre_meta, 0)]) })));
+  root.append(el('h2', {}, 'Hallazgos'));
+  root.append(finds([
+    `<b>El cumplimiento pasó de ${pct(per[0].cumplimiento_meta_pct)} a ${pct(per[1].cumplimiento_meta_pct)}</b> desde julio, y el error bajó de ${pct(per[0].error_pct, 2)} a ${pct(per[1].error_pct, 2)}. Parte de la mejora también viene de la curva de aprendizaje de los operadores nuevos.`,
+    `<b>El turno noche cumple ${pct(nocheT.cumplimiento_meta_pct, 0)}</b> frente a ${pct(mañT.cumplimiento_meta_pct, 0)} del turno mañana, y tiene el error más alto (${pct(nocheT.error_pct, 2)}). Es la primera palanca de mejora.`,
+    `<b>${bajo.length} de ${ops.length} operadores quedan bajo la meta.</b> Con menos de 6 meses de antigüedad el cumplimiento es ${pct(ant[0].cumplimiento_meta_pct, 0)} y el error ${pct(ant[0].error_pct, 2)}, lo que apunta a capacitación y acompañamiento más que a sanciones.`]));
+  root.append(defs([
+    'Líneas por hora = suma de líneas ÷ suma de horas. Se pondera por horas; promediar los ratios diarios daría el mismo peso a un día de 3 horas que a uno de 8.',
+    'Cumplimiento de meta = suma de líneas ÷ suma de (horas × meta de la zona). Metas por zona: Pallet 36, Estantería 50, Flow rack 65, Refrigerado 32 líneas/hora.',
+    'Error de picking = errores ÷ líneas.',
+    'Se excluyen registros sin horas, con más de 12 horas (posible error de digitación), con líneas vacías o negativas. Los duplicados se eliminan por id y el turno se normaliza.',
+    'La comparación antes y después de julio no prueba causalidad: coinciden el cambio de programa y la maduración del equipo.']));
+  return root;
+}
+
+/* ---------- pestañas ---------- */
+const TABS = [['rotacion', buildRotacion], ['otif', buildOtif], ['prod', buildProd]];
+const panels = document.getElementById('panels');
+TABS.forEach(([k, fn]) => {
+  const pnl = el('section', { id: 'p-' + k, role: 'tabpanel', 'aria-labelledby': 't-' + k });
+  pnl.hidden = true; pnl.append(fn()); panels.append(pnl);
+});
+function select(k) {
+  if (!TABS.some(t => t[0] === k)) k = 'rotacion';
+  TABS.forEach(([id]) => {
+    const b = document.getElementById('t-' + id); b.setAttribute('aria-selected', id === k); b.tabIndex = id === k ? 0 : -1;
+    document.getElementById('p-' + id).hidden = id !== k;
+  });
+  try { history.replaceState(null, '', '#' + k); } catch (e) { }
+}
+TABS.forEach(([k]) => {
+  const b = document.getElementById('t-' + k);
+  b.addEventListener('click', () => select(k));
+  b.addEventListener('keydown', ev => {
+    const i = TABS.findIndex(t => t[0] === k);
+    if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') {
+      const nx = TABS[(i + (ev.key === 'ArrowRight' ? 1 : TABS.length - 1)) % TABS.length][0];
+      select(nx); document.getElementById('t-' + nx).focus();
+    }
+  });
+});
+select(location.hash.slice(1));
+</script>
+</body></html>

@@ -1,0 +1,10 @@
+problema,filas,tratamiento
+Filas totales en bruto,5853,Referencia
+id_pedido duplicado (filas sobrantes),30,Se conserva la primera aparición
+"Fechas en formato dd/mm/yyyy (pedido, compromiso o entrega)",151,Se convierten a yyyy-mm-dd
+Transportista con nombre inconsistente,92,"Se unifica a 4 transportistas (TRIM, mayúsculas, espacios)"
+Pedidos sin fecha de entrega (pendientes al corte),55,Se excluyen del OTIF: aún no se pueden evaluar
+Cantidad entregada vacía (con entrega registrada),20,Se excluyen: no se puede evaluar In Full
+Sobreentrega (entregado > pedido),25,Se mantiene como completo; en fill rate se limita a lo pedido
+Entrega anterior al pedido (fechas invertidas),12,Se excluyen: no se sabe cuál fecha es la correcta
+Pedidos evaluables para OTIF,5736,Base de los KPIs

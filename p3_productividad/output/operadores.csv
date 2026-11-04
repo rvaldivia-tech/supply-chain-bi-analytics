@@ -1,0 +1,15 @@
+id_operador,turno_asignado,antiguedad_meses_inicio,zona_principal
+OP01,Mañana,17,Refrigerado
+OP02,Mañana,37,Estantería
+OP03,Mañana,39,Estantería
+OP04,Mañana,2,Pallet
+OP05,Mañana,11,Estantería
+OP06,Mañana,21,Pallet
+OP07,Tarde,35,Pallet
+OP08,Tarde,14,Flow rack
+OP09,Tarde,16,Estantería
+OP10,Tarde,22,Pallet
+OP11,Tarde,2,Pallet
+OP12,Noche,31,Estantería
+OP13,Noche,41,Refrigerado
+OP14,Noche,38,Refrigerado

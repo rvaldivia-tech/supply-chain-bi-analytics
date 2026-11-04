@@ -1,0 +1,61 @@
+sku,descripcion,categoria,costo_unitario,stock_inicial
+SKU001,Producto 001,Snacks,2.26,485
+SKU002,Producto 002,Bebidas,5.11,111
+SKU003,Producto 003,Cuidado Personal,19.05,541
+SKU004,Producto 004,Limpieza,17.7,26
+SKU005,Producto 005,Snacks,5.87,566
+SKU006,Producto 006,Snacks,1.66,202
+SKU007,Producto 007,Limpieza,18.43,134
+SKU008,Producto 008,Snacks,3.7,2071
+SKU009,Producto 009,Limpieza,5.58,932
+SKU010,Producto 010,Abarrotes,7.17,232
+SKU011,Producto 011,Cuidado Personal,35.8,57
+SKU012,Producto 012,Cuidado Personal,16.92,200
+SKU013,Producto 013,Cuidado Personal,12.35,215
+SKU014,Producto 014,Bebidas,4.46,583
+SKU015,Producto 015,Bebidas,11.51,129
+SKU016,Producto 016,Snacks,4.2,432
+SKU017,Producto 017,Snacks,5.44,168
+SKU018,Producto 018,Abarrotes,3.43,444
+SKU019,Producto 019,Snacks,1.71,34
+SKU020,Producto 020,Limpieza,11.28,20
+SKU021,Producto 021,Limpieza,5.54,391
+SKU022,Producto 022,Cuidado Personal,7.09,90
+SKU023,Producto 023,Abarrotes,11.0,461
+SKU024,Producto 024,Snacks,2.03,452
+SKU025,Producto 025,Snacks,5.5,362
+SKU026,Producto 026,Abarrotes,4.17,90
+SKU027,Producto 027,Bebidas,3.84,285
+SKU028,Producto 028,Bebidas,3.88,1078
+SKU029,Producto 029,Snacks,6.53,975
+SKU030,Producto 030,Cuidado Personal,20.1,2097
+SKU031,Producto 031,Limpieza,7.99,67
+SKU032,Producto 032,Bebidas,7.91,278
+SKU033,Producto 033,Abarrotes,3.1,232
+SKU034,Producto 034,Abarrotes,8.21,469
+SKU035,Producto 035,Bebidas,11.43,791
+SKU036,Producto 036,Cuidado Personal,9.72,408
+SKU037,Producto 037,Bebidas,8.39,216
+SKU038,Producto 038,Snacks,3.45,979
+SKU039,Producto 039,Snacks,6.08,64
+SKU040,Producto 040,Abarrotes,13.33,537
+SKU041,Producto 041,Bebidas,9.52,286
+SKU042,Producto 042,Limpieza,23.02,25
+SKU043,Producto 043,Limpieza,14.37,324
+SKU044,Producto 044,Snacks,7.11,159
+SKU045,Producto 045,Bebidas,2.99,2270
+SKU046,Producto 046,Snacks,4.63,4469
+SKU047,Producto 047,Snacks,1.4,1169
+SKU048,Producto 048,Bebidas,7.4,426
+SKU049,Producto 049,Abarrotes,8.66,199
+SKU050,Producto 050,Limpieza,23.71,63
+SKU051,Producto 051,Snacks,4.92,1365
+SKU052,Producto 052,Bebidas,6.14,854
+SKU053,Producto 053,Abarrotes,5.94,123
+SKU054,Producto 054,Abarrotes,10.58,153
+SKU055,Producto 055,Bebidas,9.34,1081
+SKU056,Producto 056,Abarrotes,12.82,1502
+SKU057,Producto 057,Bebidas,5.92,960
+SKU058,Producto 058,Limpieza,15.19,134
+SKU059,Producto 059,Cuidado Personal,14.64,235
+SKU060,Producto 060,Abarrotes,13.39,641

@@ -1,0 +1,8 @@
+motivo,pedidos_fallidos,pct,pct_acumulado
+Quiebre de stock,357,27.5,27.5
+Retraso de transporte,310,23.9,51.4
+Error de picking,162,12.5,63.9
+Tráfico o clima,138,10.6,74.5
+Cliente no disponible,119,9.2,83.7
+Producto dañado,119,9.2,92.8
+Documentación incompleta,93,7.2,100.0

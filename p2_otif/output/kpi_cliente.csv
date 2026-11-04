@@ -1,0 +1,41 @@
+id_cliente,cliente,canal,zona,pedidos,pct_otif
+C025,Cliente 025,Tienda tradicional,Provincia,143,52.4
+C005,Cliente 005,Farmacia,Provincia,165,58.8
+C009,Cliente 009,Tienda tradicional,Provincia,139,60.4
+C032,Cliente 032,Tienda tradicional,Provincia,142,60.6
+C037,Cliente 037,Supermercado,Provincia,138,60.9
+C007,Cliente 007,Supermercado,Provincia,133,63.9
+C015,Cliente 015,Mayorista,Provincia,132,65.2
+C040,Cliente 040,Supermercado,Lima Norte,140,66.4
+C019,Cliente 019,Tienda tradicional,Provincia,132,69.7
+C013,Cliente 013,Supermercado,Lima Norte,146,75.3
+C004,Cliente 004,Supermercado,Lima Sur,135,75.6
+C008,Cliente 008,Farmacia,Lima Centro,131,75.6
+C011,Cliente 011,Supermercado,Lima Centro,131,77.1
+C003,Cliente 003,Farmacia,Lima Sur,136,78.7
+C033,Cliente 033,Supermercado,Lima Norte,149,79.2
+C028,Cliente 028,Tienda tradicional,Lima Norte,142,79.6
+C016,Cliente 016,Farmacia,Callao,149,79.9
+C027,Cliente 027,Tienda tradicional,Lima Sur,146,80.1
+C012,Cliente 012,Farmacia,Lima Centro,137,80.3
+C031,Cliente 031,Supermercado,Lima Norte,137,80.3
+C022,Cliente 022,Mayorista,Lima Centro,144,80.6
+C023,Cliente 023,Tienda tradicional,Lima Norte,129,81.4
+C030,Cliente 030,Tienda tradicional,Lima Norte,145,81.4
+C017,Cliente 017,Mayorista,Callao,146,81.5
+C020,Cliente 020,Tienda tradicional,Callao,145,82.1
+C021,Cliente 021,Mayorista,Lima Norte,145,82.1
+C034,Cliente 034,Supermercado,Lima Centro,156,82.1
+C029,Cliente 029,Supermercado,Callao,159,83.0
+C024,Cliente 024,Tienda tradicional,Lima Norte,161,83.2
+C018,Cliente 018,Mayorista,Lima Norte,158,83.5
+C039,Cliente 039,Supermercado,Lima Sur,146,83.6
+C010,Cliente 010,Farmacia,Callao,156,84.0
+C006,Cliente 006,Supermercado,Lima Norte,158,84.2
+C014,Cliente 014,Supermercado,Lima Sur,123,84.6
+C002,Cliente 002,Tienda tradicional,Lima Sur,157,84.7
+C035,Cliente 035,Tienda tradicional,Lima Centro,146,84.9
+C026,Cliente 026,Supermercado,Lima Centro,149,85.2
+C036,Cliente 036,Farmacia,Lima Sur,145,85.5
+C038,Cliente 038,Supermercado,Callao,131,85.5
+C001,Cliente 001,Mayorista,Lima Sur,133,88.0

@@ -1,0 +1,41 @@
+id_cliente,cliente,canal,zona
+C001,Cliente 001,Mayorista,Lima Sur
+C002,Cliente 002,Tienda tradicional,Lima Sur
+C003,Cliente 003,Farmacia,Lima Sur
+C004,Cliente 004,Supermercado,Lima Sur
+C005,Cliente 005,Farmacia,Provincia
+C006,Cliente 006,Supermercado,Lima Norte
+C007,Cliente 007,Supermercado,Provincia
+C008,Cliente 008,Farmacia,Lima Centro
+C009,Cliente 009,Tienda tradicional,Provincia
+C010,Cliente 010,Farmacia,Callao
+C011,Cliente 011,Supermercado,Lima Centro
+C012,Cliente 012,Farmacia,Lima Centro
+C013,Cliente 013,Supermercado,Lima Norte
+C014,Cliente 014,Supermercado,Lima Sur
+C015,Cliente 015,Mayorista,Provincia
+C016,Cliente 016,Farmacia,Callao
+C017,Cliente 017,Mayorista,Callao
+C018,Cliente 018,Mayorista,Lima Norte
+C019,Cliente 019,Tienda tradicional,Provincia
+C020,Cliente 020,Tienda tradicional,Callao
+C021,Cliente 021,Mayorista,Lima Norte
+C022,Cliente 022,Mayorista,Lima Centro
+C023,Cliente 023,Tienda tradicional,Lima Norte
+C024,Cliente 024,Tienda tradicional,Lima Norte
+C025,Cliente 025,Tienda tradicional,Provincia
+C026,Cliente 026,Supermercado,Lima Centro
+C027,Cliente 027,Tienda tradicional,Lima Sur
+C028,Cliente 028,Tienda tradicional,Lima Norte
+C029,Cliente 029,Supermercado,Callao
+C030,Cliente 030,Tienda tradicional,Lima Norte
+C031,Cliente 031,Supermercado,Lima Norte
+C032,Cliente 032,Tienda tradicional,Provincia
+C033,Cliente 033,Supermercado,Lima Norte
+C034,Cliente 034,Supermercado,Lima Centro
+C035,Cliente 035,Tienda tradicional,Lima Centro
+C036,Cliente 036,Farmacia,Lima Sur
+C037,Cliente 037,Supermercado,Provincia
+C038,Cliente 038,Supermercado,Callao
+C039,Cliente 039,Supermercado,Lima Sur
+C040,Cliente 040,Supermercado,Lima Norte

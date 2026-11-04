@@ -1,0 +1,10 @@
+problema,filas,tratamiento
+Filas totales en bruto,2055,Referencia
+id_registro duplicado (filas sobrantes),25,Se conserva la primera aparición
+Fecha en formato dd/mm/yyyy,82,Se convierte a yyyy-mm-dd
+Turno escrito de forma inconsistente,58,Se unifica a Mañana / Tarde / Noche
+Horas vacías o en cero,25,Se excluyen: no se puede calcular líneas por hora
+Horas atípicas (> 12 en un día),8,Se excluyen: error de digitación probable (72 en lugar de 7.2)
+Líneas vacías,12,Se excluyen
+Líneas negativas,6,Se excluyen: podría ser una reversa y no un picking
+Registros válidos para KPIs,1979,Base de los KPIs
