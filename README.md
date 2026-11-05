@@ -27,3 +27,9 @@ Cada carpeta tiene `data/` (CSV crudos), `sql/` (diagnóstico, limpieza y KPIs),
 - No lo muestres como experiencia laboral. Ponlo en una sección **Proyectos** del CV y en LinkedIn, con el problema de negocio, la herramienta y un resultado concreto.
 - Ejemplo de línea para el CV: *Proyecto: análisis de rotación de inventario con SQL y Power BI (datos simulados); limpieza de 5 tipos de error, clasificación ABC y detección de 10 SKUs con más de 90 días de cobertura.*
 - Para que cuente como Power BI, falta construir el informe `.pbix` con estos CSV. Las medidas DAX ya están en cada README.
+
+## Vista previa de los tableros
+
+| Rotación de inventario | Nivel de servicio OTIF | Productividad de picking |
+|---|---|---|
+| ![Rotación](p1_rotacion_inventario/capturas/dashboard.png) | ![OTIF](p2_otif/capturas/dashboard.png) | ![Picking](p3_productividad/capturas/dashboard.png) |
