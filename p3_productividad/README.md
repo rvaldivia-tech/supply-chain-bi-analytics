@@ -1,5 +1,7 @@
 # Proyecto 3 · Productividad de picking
 
+![Dashboard del proyecto](capturas/dashboard.png)
+
 > Datos **simulados** (no provienen de ninguna empresa). Se generaron con errores de calidad a propósito.
 
 ## Pregunta de negocio
