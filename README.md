@@ -23,7 +23,7 @@ Cada carpeta tiene `data/` (CSV crudos), `sql/` (diagnóstico, limpieza y KPIs),
 - `build_dashboard.py`: regenera el tablero desde `output/`.
 
 ## Cómo presentarlo
-- Declara que los datos son simulados. 
+- Declaro que los datos son simulados. 
 - Proyecto: análisis de rotación de inventario con SQL y Power BI (datos simulados); limpieza de 5 tipos de error, clasificación ABC y detección de 10 SKUs con más de 90 días de cobertura.
 
 ## Vista previa de los tableros
